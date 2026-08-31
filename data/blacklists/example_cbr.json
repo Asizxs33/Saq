@@ -1,0 +1,12 @@
+{
+  "regulator": "CBR (Bank of Russia) — unlicensed financial market participants (SAMPLE DATA)",
+  "source_url": "https://www.cbr.ru/inside/warning-list/",
+  "updated": "2026-06-01",
+  "entries": [
+    {
+      "name": "Example Invest LLC",
+      "domains": ["example-invest.example"],
+      "note": "SAMPLE ENTRY — replace with a real, periodically-updated snapshot of the actual regulator list"
+    }
+  ]
+}

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Test Interface - LuminaPortal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: { "primary": "#4848e5", "background-light": "#f6f6f8", "background-dark": "#111121" },
+        fontFamily: { "display": ["Inter"] },
+        borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+      },
+    },
+  }
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .option-label { transition: all 0.15s ease; }
+  .option-label.selected { border-color: #4848e5; background-color: rgba(72,72,229,0.05); }
+  .fade-in { animation: fadeIn 0.2s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  #confirmModal { display: none; }
+  #confirmModal.open { display: flex; }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+
+<!-- Confirm Submit Modal -->
+<div id="confirmModal" class="fixed inset-0 z-50 items-center justify-center bg-black/50 backdrop-blur-sm">
+  <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
+        <span class="material-symbols-outlined text-amber-600 text-2xl">help</span>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold">Finish Test?</h3>
+        <p id="modalUnanswered" class="text-sm text-slate-500 dark:text-slate-400"></p>
+      </div>
+    </div>
+    <p class="text-slate-600 dark:text-slate-400 mb-6">Are you sure you want to submit your test? You cannot go back after submission.</p>
+    <div class="flex gap-3">
+      <button id="cancelSubmit" class="flex-1 py-3 rounded-xl border border-slate-200 dark:border-slate-700 font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Cancel</button>
+      <button id="confirmSubmit" class="flex-1 py-3 rounded-xl bg-primary text-white font-bold hover:bg-primary/90 transition-colors">Submit Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="sticky top-0 z-10 w-full border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 md:px-10 py-4 flex items-center justify-between">
+  <div class="flex items-center gap-3">
+    <div class="p-2 bg-primary/10 rounded-lg">
+      <span class="material-symbols-outlined text-primary">menu_book</span>
+    </div>
+    <div>
+      <h1 id="testTitle" class="text-lg font-bold leading-tight tracking-tight text-slate-900 dark:text-slate-100">Loading...</h1>
+      <p id="testSection" class="text-xs font-medium text-slate-500 dark:text-slate-400"></p>
+    </div>
+  </div>
+  <div class="flex items-center gap-4">
+    <div id="timerContainer" class="flex items-center gap-2 px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl">
+      <span id="timerIcon" class="material-symbols-outlined text-slate-600 dark:text-slate-400 text-xl">timer</span>
+      <span id="timerDisplay" class="font-bold text-lg tabular-nums text-slate-700 dark:text-slate-300">--:--</span>
+    </div>
+    <button id="finishEarlyBtn" class="hidden md:flex items-center justify-center rounded-xl h-11 px-6 bg-primary text-white text-sm font-bold transition-all hover:bg-primary/90">
+      Finish early
+    </button>
+  </div>
+</header>
+
+<!-- Main Question Area -->
+<main class="flex-1 flex flex-col items-center w-full max-w-4xl mx-auto px-4 py-8">
+  <div id="questionContainer" class="w-full bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden fade-in">
+    <div class="p-6 md:p-10">
+      <div class="flex items-center gap-2 mb-6">
+        <span id="questionBadge" class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full uppercase tracking-wider">Question 1</span>
+        <span class="text-slate-400 text-sm">Multiple Choice</span>
+      </div>
+      <h2 id="questionText" class="text-2xl md:text-3xl font-bold leading-snug text-slate-900 dark:text-slate-100 mb-8"></h2>
+      <div id="optionsContainer" class="grid grid-cols-1 gap-4"></div>
+    </div>
+  </div>
+
+  <!-- Mobile Finish Button -->
+  <button id="finishEarlyMobile" class="md:hidden mt-6 w-full flex items-center justify-center rounded-xl h-12 bg-primary text-white text-base font-bold">
+    Finish early
+  </button>
+</main>
+
+<!-- Footer Progress -->
+<footer class="w-full bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 p-4 md:px-10">
+  <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-6">
+    <div class="flex flex-col w-full md:w-64 gap-2">
+      <div class="flex justify-between items-end">
+        <span id="progressLabel" class="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wide">Question 1 <span class="text-slate-400 font-medium">of 10</span></span>
+        <span id="progressPct" class="text-sm font-bold text-primary">10%</span>
+      </div>
+      <div class="w-full h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+        <div id="progressBar" class="h-full bg-primary rounded-full transition-all duration-500" style="width: 10%;"></div>
+      </div>
+    </div>
+    <div class="flex items-center gap-3 w-full md:w-auto md:ml-auto">
+      <button id="prevBtn" class="flex-1 md:flex-none flex items-center justify-center gap-2 rounded-xl h-12 px-8 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+        <span class="material-symbols-outlined text-xl">arrow_back</span><span>Back</span>
+      </button>
+      <button id="nextBtn" class="flex-1 md:flex-none flex items-center justify-center gap-2 rounded-xl h-12 px-8 bg-primary text-white font-bold hover:bg-primary/90 transition-colors">
+        <span id="nextBtnText">Next</span><span class="material-symbols-outlined text-xl">arrow_forward</span>
+      </button>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== THEME =====
+(function() {
+  const stored = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (stored === 'dark' || (!stored && prefersDark)) document.documentElement.classList.add('dark');
+})();
+
+// ===== TEST DATA =====
+const TESTS = {
+  math: {
+    name: 'Advanced Mathematics', section: 'Section A: Calculus & Algebra', duration: 30, passingScore: 70,
+    questions: [
+      { text: "What is the derivative of f(x) = x³ + 2x²?", options: ["3x² + 4x", "3x + 4", "x² + 2x", "3x² + 2x"], correct: 0 },
+      { text: "What is ∫ 2x dx?", options: ["2", "x² + C", "2x²", "x + C"], correct: 1 },
+      { text: "Solve: x² − 7x + 12 = 0", options: ["x = 3 and x = 4", "x = 2 and x = 6", "x = 1 and x = 12", "x = −3 and x = −4"], correct: 0 },
+      { text: "What is log₂(16)?", options: ["2", "4", "8", "16"], correct: 1 },
+      { text: "What is sin(90°)?", options: ["0", "0.5", "√2/2", "1"], correct: 3 },
+      { text: "In a right triangle with legs 5 and 12, what is the hypotenuse?", options: ["13", "17", "15", "11"], correct: 0 },
+      { text: "What is the area of a circle with radius 7?", options: ["14π", "49π", "7π", "21π"], correct: 1 },
+      { text: "What is the determinant of the matrix [[2, 3], [1, 4]]?", options: ["5", "8", "11", "−5"], correct: 0 },
+      { text: "Expand (x + 3)²:", options: ["x² + 9", "x² + 3x + 9", "x² + 6x + 9", "x² + 6x + 3"], correct: 2 },
+      { text: "What is the sum of interior angles of a hexagon?", options: ["540°", "720°", "900°", "360°"], correct: 1 }
+    ]
+  },
+  chemistry: {
+    name: 'Organic Chemistry', section: 'Section A: Molecular Structure', duration: 45, passingScore: 75,
+    questions: [
+      { text: "What is the molecular formula of glucose?", options: ["C₆H₁₂O₆", "C₆H₁₂O", "C₁₂H₂₂O₁₁", "CH₄O"], correct: 0 },
+      { text: "What type of bond is formed by sharing electrons?", options: ["Ionic", "Covalent", "Metallic", "Hydrogen"], correct: 1 },
+      { text: "What is the pH of pure water at 25°C?", options: ["5", "7", "9", "14"], correct: 1 },
+      { text: "Which element has atomic number 6?", options: ["Oxygen", "Nitrogen", "Carbon", "Boron"], correct: 2 },
+      { text: "What is Avogadro's number approximately?", options: ["6.022 × 10²³", "3.14 × 10¹⁶", "1.6 × 10⁻¹⁹", "9.8 × 10⁸"], correct: 0 },
+      { text: "Which functional group defines aldehydes?", options: ["−OH", "−COOH", "−CHO", "−CO−"], correct: 2 },
+      { text: "What are the products of complete combustion of methane?", options: ["CO + H₂", "CO₂ + H₂O", "C + H₂O", "CO₂ + H₂"], correct: 1 },
+      { text: "Which acid is found in vinegar?", options: ["Citric acid", "Lactic acid", "Acetic acid", "Formic acid"], correct: 2 },
+      { text: "What is the IUPAC name of CH₃OH?", options: ["Methanol", "Ethanol", "Propanol", "Butanol"], correct: 0 },
+      { text: "What is the valence of nitrogen?", options: ["2", "5", "3", "4"], correct: 2 }
+    ]
+  },
+  history: {
+    name: 'World History', section: 'Section A: Modern History', duration: 20, passingScore: 65,
+    questions: [
+      { text: "In what year did World War II end?", options: ["1943", "1944", "1945", "1946"], correct: 2 },
+      { text: "Who was the first president of the United States?", options: ["Thomas Jefferson", "George Washington", "John Adams", "Benjamin Franklin"], correct: 1 },
+      { text: "The French Revolution began in which year?", options: ["1776", "1789", "1804", "1815"], correct: 1 },
+      { text: "In which year did the Berlin Wall fall?", options: ["1987", "1988", "1989", "1991"], correct: 2 },
+      { text: "Who co-wrote 'The Communist Manifesto'?", options: ["Lenin and Stalin", "Rousseau and Voltaire", "Marx and Engels", "Trotsky and Mao"], correct: 2 },
+      { text: "What ancient wonder was located in Alexandria?", options: ["The Colossus", "The Lighthouse", "The Hanging Gardens", "The Mausoleum"], correct: 1 },
+      { text: "The Renaissance originated in which country?", options: ["France", "Germany", "Italy", "Spain"], correct: 2 },
+      { text: "Who led India's independence movement?", options: ["Jawaharlal Nehru", "Subhas Chandra Bose", "Mahatma Gandhi", "Muhammad Ali Jinnah"], correct: 2 },
+      { text: "The United Nations was founded in which year?", options: ["1943", "1945", "1947", "1950"], correct: 1 },
+      { text: "Which empire was known as 'the empire on which the sun never sets'?", options: ["Roman Empire", "Ottoman Empire", "Spanish Empire", "British Empire"], correct: 3 }
+    ]
+  },
+  economics: {
+    name: 'Macroeconomics', section: 'Section A: Macro Theory', duration: 40, passingScore: 70,
+    questions: [
+      { text: "What does GDP stand for?", options: ["General Development Product", "Gross Domestic Product", "Global Distribution Protocol", "Government Development Plan"], correct: 1 },
+      { text: "Who wrote 'The Wealth of Nations'?", options: ["Karl Marx", "John Maynard Keynes", "Adam Smith", "Milton Friedman"], correct: 2 },
+      { text: "In the equation GDP = C + I + G + (X − M), what does X − M represent?", options: ["Net exports", "National income", "Tax minus subsidies", "Investment returns"], correct: 0 },
+      { text: "What is stagflation?", options: ["High growth + high employment", "Low inflation + high growth", "High inflation + high unemployment", "Low inflation + high unemployment"], correct: 2 },
+      { text: "During a recession, central banks typically:", options: ["Raise interest rates", "Lower interest rates", "Increase reserve requirements", "Reduce money supply"], correct: 1 },
+      { text: "What is the multiplier effect in macroeconomics?", options: ["Tax cuts multiply economic output", "Initial spending leads to a larger increase in GDP", "Investment always returns double", "Exports multiply imports"], correct: 1 },
+      { text: "A trade deficit means:", options: ["Exports exceed imports", "Imports exceed exports", "Balanced trade", "No international trade"], correct: 1 },
+      { text: "What is monetary policy?", options: ["Government spending decisions", "Tax collection strategies", "Central bank control of money supply", "Trade regulation"], correct: 2 },
+      { text: "What is the Consumer Price Index (CPI) primarily used to measure?", options: ["GDP growth", "Inflation", "Unemployment", "Trade balance"], correct: 1 },
+      { text: "What is opportunity cost?", options: ["The price of an item", "The cost of producing goods", "The value of the next best alternative foregone", "The government tax rate"], correct: 2 }
+    ]
+  }
+};
+
+// ===== STATE =====
+const urlParams = new URLSearchParams(window.location.search);
+const testId = urlParams.get('id') || 'math';
+const isPractice = urlParams.get('mode') === 'practice';
+const testMeta = JSON.parse(sessionStorage.getItem('currentTest') || '{}');
+
+const test = TESTS[testId] || TESTS.math;
+const TOTAL = test.questions.length;
+
+let currentQ = 0;
+let answers = new Array(TOTAL).fill(null);
+let timeRemaining = (testMeta.duration || test.duration) * 60;
+let timerInterval = null;
+let testLocked = false;
+let testFinished = false;
+let startTime = Date.now();
+
+// ===== INIT =====
+document.getElementById('testTitle').textContent = testMeta.name || test.name;
+document.getElementById('testSection').textContent = test.section;
+
+// Clear any previous lock
+sessionStorage.removeItem('testLocked');
+
+// ===== TIMER =====
+function formatTime(secs) {
+  const m = Math.floor(secs / 60).toString().padStart(2, '0');
+  const s = (secs % 60).toString().padStart(2, '0');
+  return m + ':' + s;
+}
+
+function updateTimerUI() {
+  document.getElementById('timerDisplay').textContent = formatTime(timeRemaining);
+  const container = document.getElementById('timerContainer');
+  const icon = document.getElementById('timerIcon');
+  if (timeRemaining <= 300) { // last 5 minutes — red
+    container.className = 'flex items-center gap-2 px-4 py-2 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl';
+    icon.className = 'material-symbols-outlined text-red-600 dark:text-red-400 text-xl';
+    document.getElementById('timerDisplay').className = 'font-bold text-lg tabular-nums text-red-600 dark:text-red-400';
+  }
+}
+
+function startTimer() {
+  if (isPractice) { // no timer in practice mode
+    document.getElementById('timerDisplay').textContent = '∞';
+    return;
+  }
+  updateTimerUI();
+  timerInterval = setInterval(() => {
+    if (testFinished) { clearInterval(timerInterval); return; }
+    timeRemaining--;
+    updateTimerUI();
+    if (timeRemaining <= 0) {
+      clearInterval(timerInterval);
+      submitTest(true);
+    }
+  }, 1000);
+}
+
+startTimer();
+
+// ===== ANTI-CHEAT =====
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden && !testLocked && !testFinished && !isPractice) {
+    testLocked = true;
+    clearInterval(timerInterval);
+    // Store results so far before locking
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+    const correctCount = answers.filter((a, i) => a === test.questions[i].correct).length;
+    sessionStorage.setItem('testResults', JSON.stringify({
+      testId, testName: testMeta.name || test.name, score: 0,
+      correctCount, totalQuestions: TOTAL,
+      answers, questions: test.questions,
+      timeTaken: elapsed, locked: true, passing: testMeta.passing || test.passingScore
+    }));
+    sessionStorage.setItem('testLocked', 'true');
+    window.location.href = 'locked.html';
+  }
+});
+
+window.addEventListener('blur', () => {
+  // Additional detection for window minimize
+  if (!testLocked && !testFinished && !document.hidden && !isPractice) {
+    // Only trigger after a small delay to avoid false positives from modal focus
+    setTimeout(() => {
+      if (!document.hasFocus() && !testLocked && !testFinished) {
+        testLocked = true;
+        clearInterval(timerInterval);
+        sessionStorage.setItem('testLocked', 'true');
+        window.location.href = 'locked.html';
+      }
+    }, 500);
+  }
+});
+
+// ===== RENDER QUESTION =====
+function renderQuestion() {
+  const q = test.questions[currentQ];
+  document.getElementById('questionBadge').textContent = 'Question ' + (currentQ + 1);
+  document.getElementById('questionText').textContent = q.text;
+  document.getElementById('questionContainer').className = document.getElementById('questionContainer').className.replace('fade-in','') + ' fade-in';
+  void document.getElementById('questionContainer').offsetWidth; // reflow for animation
+
+  const container = document.getElementById('optionsContainer');
+  container.innerHTML = '';
+  const optionLetters = ['A', 'B', 'C', 'D'];
+
+  q.options.forEach((opt, idx) => {
+    const isSelected = answers[currentQ] === idx;
+    const label = document.createElement('label');
+    label.className = 'option-label group relative flex items-center gap-4 rounded-xl border-2 p-5 cursor-pointer transition-all ' +
+      (isSelected
+        ? 'border-primary bg-primary/5 dark:bg-primary/10 selected'
+        : 'border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 hover:border-primary/50');
+
+    label.innerHTML = `
+      <input type="radio" name="answer" value="${idx}" ${isSelected ? 'checked' : ''}
+        class="h-6 w-6 border-2 border-slate-300 dark:border-slate-600 text-primary focus:ring-primary focus:ring-offset-0 checked:border-primary"
+        style="accent-color:#4848e5"/>
+      <div class="flex flex-col flex-1">
+        <span class="text-slate-900 dark:text-slate-100 font-semibold text-lg">${opt}</span>
+        <span class="text-slate-500 dark:text-slate-400 text-sm">Option ${optionLetters[idx]}</span>
+      </div>
+      <div class="${isSelected ? 'opacity-100' : 'opacity-0'} ml-auto transition-opacity">
+        <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24">check_circle</span>
+      </div>
+    `;
+
+    label.querySelector('input').addEventListener('change', () => {
+      answers[currentQ] = idx;
+      // Rerender to update styles
+      renderQuestion();
+    });
+
+    container.appendChild(label);
+  });
+
+  updateProgress();
+  updateNavButtons();
+}
+
+function updateProgress() {
+  const pct = Math.round(((currentQ + 1) / TOTAL) * 100);
+  document.getElementById('progressLabel').innerHTML = 'Question ' + (currentQ + 1) + ' <span class="text-slate-400 font-medium">of ' + TOTAL + '</span>';
+  document.getElementById('progressPct').textContent = pct + '%';
+  document.getElementById('progressBar').style.width = pct + '%';
+}
+
+function updateNavButtons() {
+  document.getElementById('prevBtn').disabled = currentQ === 0;
+  document.getElementById('prevBtn').classList.toggle('opacity-40', currentQ === 0);
+  document.getElementById('prevBtn').classList.toggle('cursor-not-allowed', currentQ === 0);
+
+  const isLast = currentQ === TOTAL - 1;
+  document.getElementById('nextBtnText').textContent = isLast ? 'Submit' : 'Next';
+  const nextIcon = document.getElementById('nextBtn').querySelector('.material-symbols-outlined');
+  nextIcon.textContent = isLast ? 'check_circle' : 'arrow_forward';
+}
+
+// ===== NAVIGATION =====
+document.getElementById('prevBtn').addEventListener('click', () => {
+  if (currentQ > 0) { currentQ--; renderQuestion(); }
+});
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+  if (currentQ < TOTAL - 1) {
+    currentQ++;
+    renderQuestion();
+  } else {
+    showConfirmModal();
+  }
+});
+
+// ===== FINISH EARLY =====
+function showConfirmModal() {
+  const unanswered = answers.filter(a => a === null).length;
+  document.getElementById('modalUnanswered').textContent = unanswered > 0
+    ? unanswered + ' question' + (unanswered > 1 ? 's' : '') + ' unanswered'
+    : 'All questions answered';
+  document.getElementById('confirmModal').classList.add('open');
+}
+
+document.getElementById('finishEarlyBtn').addEventListener('click', showConfirmModal);
+document.getElementById('finishEarlyMobile').addEventListener('click', showConfirmModal);
+document.getElementById('cancelSubmit').addEventListener('click', () => {
+  document.getElementById('confirmModal').classList.remove('open');
+});
+document.getElementById('confirmSubmit').addEventListener('click', () => {
+  document.getElementById('confirmModal').classList.remove('open');
+  submitTest(false);
+});
+
+// ===== SUBMIT =====
+function submitTest(timedOut) {
+  if (testFinished) return;
+  testFinished = true;
+  clearInterval(timerInterval);
+  const elapsed = Math.floor((Date.now() - startTime) / 1000);
+  const correctCount = answers.filter((a, i) => a === test.questions[i].correct).length;
+  const score = Math.round((correctCount / TOTAL) * 100);
+
+  sessionStorage.setItem('testResults', JSON.stringify({
+    testId, testName: testMeta.name || test.name, score, correctCount,
+    totalQuestions: TOTAL, answers, questions: test.questions,
+    timeTaken: elapsed, timedOut: !!timedOut, locked: false,
+    passing: testMeta.passing || test.passingScore, isPractice,
+    duration: testMeta.duration || test.duration
+  }));
+
+  // Save to completed tests if not practice
+  if (!isPractice) {
+    const completed = JSON.parse(localStorage.getItem('completedTests') || '{}');
+    completed[testId] = { score, completedAt: new Date().toISOString() };
+    localStorage.setItem('completedTests', JSON.stringify(completed));
+  }
+
+  window.location.href = 'results.html';
+}
+
+// ===== START =====
+renderQuestion();
+</script>
+</body>
+</html>

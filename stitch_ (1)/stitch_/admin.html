@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EduAdmin — Analytics Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: { "primary": "#4848e5", "background-light": "#f6f6f8", "background-dark": "#111121" },
+        fontFamily: { "display": ["Inter"] },
+        borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+      },
+    },
+  }
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; }
+  .material-symbols-outlined { font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .sidebar-link { transition: all 0.15s; }
+  .incident-row { cursor: pointer; }
+  .incident-detail { display: none; }
+  .incident-detail.open { display: table-row; }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="flex h-screen overflow-hidden">
+
+  <!-- Sidebar -->
+  <aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col flex-shrink-0">
+    <div class="p-6 flex-1 overflow-y-auto">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="bg-primary size-10 rounded-lg flex items-center justify-center text-white">
+          <span class="material-symbols-outlined">school</span>
+        </div>
+        <div>
+          <h1 class="text-slate-900 dark:text-white text-lg font-bold leading-none">EduAdmin</h1>
+          <p class="text-slate-500 text-xs mt-1">System Management</p>
+        </div>
+      </div>
+      <nav class="space-y-1" id="sidebarNav">
+        <a href="admin.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-medium">
+          <span class="material-symbols-outlined">dashboard</span><span class="text-sm">Dashboard</span>
+        </a>
+        <a href="#analytics" onclick="showSection('analytics',this)" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <span class="material-symbols-outlined">analytics</span><span class="text-sm">Analytics</span>
+        </a>
+        <a href="#students" onclick="showSection('students',this)" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <span class="material-symbols-outlined">group</span><span class="text-sm">Students</span>
+        </a>
+        <a href="constructor.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <span class="material-symbols-outlined">quiz</span><span class="text-sm">Tests &amp; Exams</span>
+        </a>
+        <a href="#violations" onclick="showSection('violations',this)" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <span class="material-symbols-outlined">report</span>
+          <span class="text-sm">Rule Breakers</span>
+          <span class="ml-auto text-[10px] font-bold bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400 px-1.5 py-0.5 rounded-full">24</span>
+        </a>
+        <a href="index.html" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <span class="material-symbols-outlined">arrow_back</span><span class="text-sm">Student Portal</span>
+        </a>
+      </nav>
+    </div>
+    <!-- Admin user -->
+    <div class="p-6 border-t border-slate-200 dark:border-slate-800">
+      <div class="flex items-center gap-3">
+        <div class="size-10 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center overflow-hidden">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkm-DDP9m73YyvmQY7WLO2tEurzTRWBYifUmwt1q2gZPrpXLI7WjvIJAL7pajmuwnBgDbx7XU8fQU0BsBCD8pi3pg8l3rVaqGUYUVo7apOvoZFeKodRaoGuic38plo9_wdjYmrRgj19IfdydXd8ThUbcuYuX9C-JqWvcnEqZ_sx_mGAeT-vGyw-XEKi5gkNF0z68wsGMmzbq-VRpVJ5MyVkzObFqs3_2EvOFQmkh_7cF_mJhq_zPhYgnXPbvKnEu5reO7pvhvABUer" alt="Admin" class="w-full h-full object-cover"/>
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold truncate">Alex Johnson</p>
+          <p class="text-xs text-slate-500 truncate">Super Admin</p>
+        </div>
+        <button id="themeToggle" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors" title="Toggle theme">
+          <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 flex flex-col overflow-hidden">
+
+    <!-- Top Header -->
+    <header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-8 flex items-center justify-between flex-shrink-0">
+      <div class="flex items-center gap-4 flex-1">
+        <div class="relative w-full max-w-md">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" style="font-size:18px">search</span>
+          <input id="adminSearch" class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/50 outline-none" placeholder="Search analytics, students, or incidents..." type="text"/>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <button class="relative p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+        </button>
+        <button onclick="window.print()" class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-primary/90 transition-colors flex items-center gap-2">
+          <span class="material-symbols-outlined" style="font-size:16px">download</span> Export PDF
+        </button>
+      </div>
+    </header>
+
+    <!-- Scrollable content -->
+    <div class="flex-1 overflow-y-auto p-8">
+
+      <!-- Section: Dashboard (default) -->
+      <div id="section-dashboard">
+        <div class="mb-8 flex items-end justify-between">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Analytics Overview</h2>
+            <p class="text-slate-500">Real-time monitoring and student performance metrics.</p>
+          </div>
+          <div class="text-xs text-slate-400 dark:text-slate-500 text-right">
+            <p>Last updated: <span id="lastUpdated"></span></p>
+            <p class="text-emerald-500 font-medium">● Live</p>
+          </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 hover:shadow-md transition-shadow">
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-2 bg-primary/10 rounded-lg text-primary"><span class="material-symbols-outlined">group</span></div>
+              <span class="text-emerald-500 text-xs font-bold bg-emerald-500/10 px-2 py-1 rounded-full">+12%</span>
+            </div>
+            <p class="text-slate-500 text-sm font-medium">Total Students</p>
+            <p class="text-2xl font-bold mt-1">12,450</p>
+          </div>
+          <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 hover:shadow-md transition-shadow">
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-2 bg-primary/10 rounded-lg text-primary"><span class="material-symbols-outlined">timer</span></div>
+              <span class="text-emerald-500 text-xs font-bold bg-emerald-500/10 px-2 py-1 rounded-full">+5.2%</span>
+            </div>
+            <p class="text-slate-500 text-sm font-medium">Active Tests</p>
+            <p id="activeTestsStat" class="text-2xl font-bold mt-1">86</p>
+          </div>
+          <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 hover:shadow-md transition-shadow">
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-2 bg-primary/10 rounded-lg text-primary"><span class="material-symbols-outlined">trending_up</span></div>
+              <span class="text-red-500 text-xs font-bold bg-red-500/10 px-2 py-1 rounded-full">-2.4%</span>
+            </div>
+            <p class="text-slate-500 text-sm font-medium">Avg. Score</p>
+            <p class="text-2xl font-bold mt-1">78.4%</p>
+          </div>
+          <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 hover:shadow-md transition-shadow">
+            <div class="flex justify-between items-start mb-4">
+              <div class="p-2 bg-primary/10 rounded-lg text-primary"><span class="material-symbols-outlined">warning</span></div>
+              <span id="incidentBadge" class="text-red-500 text-xs font-bold bg-red-500/10 px-2 py-1 rounded-full">+15%</span>
+            </div>
+            <p class="text-slate-500 text-sm font-medium">Flagged Incidents</p>
+            <p id="incidentCount" class="text-2xl font-bold mt-1">24</p>
+          </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+
+          <!-- Bar chart -->
+          <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+            <div class="flex justify-between items-center mb-6">
+              <h3 class="font-bold text-lg">Student Performance Trend</h3>
+              <select id="chartPeriod" class="text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-2 py-1 focus:ring-primary outline-none">
+                <option>Last 7 days</option>
+                <option>Last 30 days</option>
+                <option>Last 6 months</option>
+              </select>
+            </div>
+            <div id="barChart" class="h-64 flex items-end gap-2 px-2"></div>
+            <div class="flex justify-center gap-6 mt-4 text-xs text-slate-400 font-medium">
+              <div class="flex items-center gap-1"><div class="w-3 h-3 bg-primary rounded"></div> Scores</div>
+              <div class="flex items-center gap-1"><div class="w-3 h-3 bg-primary/20 rounded"></div> Average</div>
+            </div>
+          </div>
+
+          <!-- Subject bars -->
+          <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+            <div class="flex justify-between items-center mb-6">
+              <h3 class="font-bold text-lg">Subject Participation</h3>
+              <span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-slate-600 dark:hover:text-slate-200" onclick="this.textContent=this.textContent==='more_horiz'?'refresh':'more_horiz'">more_horiz</span>
+            </div>
+            <div class="space-y-5" id="subjectBars"></div>
+          </div>
+        </div>
+
+        <!-- Incidents Table -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+          <div class="p-6 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
+            <div>
+              <h3 class="font-bold text-lg">Recent Rule Breakers</h3>
+              <p class="text-sm text-slate-500">Click a row to view details.</p>
+            </div>
+            <button onclick="showSection('violations', null)" class="text-primary text-sm font-semibold hover:underline">View All Reports</button>
+          </div>
+          <div class="overflow-x-auto" id="incidentsTableContainer"></div>
+        </div>
+      </div>
+
+      <!-- Section: Analytics -->
+      <div id="section-analytics" class="hidden">
+        <h2 class="text-2xl font-bold mb-2">Analytics</h2>
+        <p class="text-slate-500 mb-8">Detailed performance metrics across all assessments.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 text-center">
+            <p class="text-slate-500 text-sm mb-1">Completion Rate</p>
+            <p class="text-4xl font-black text-primary">82%</p>
+          </div>
+          <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 text-center">
+            <p class="text-slate-500 text-sm mb-1">Pass Rate</p>
+            <p class="text-4xl font-black text-emerald-500">74%</p>
+          </div>
+          <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 text-center">
+            <p class="text-slate-500 text-sm mb-1">Avg. Time Per Test</p>
+            <p class="text-4xl font-black text-amber-500">24m</p>
+          </div>
+        </div>
+        <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+          <h3 class="font-bold text-lg mb-4">Monthly Score Distribution</h3>
+          <div id="analyticsChart" class="h-48 flex items-end gap-3 px-4"></div>
+        </div>
+      </div>
+
+      <!-- Section: Students -->
+      <div id="section-students" class="hidden">
+        <div class="flex items-center justify-between mb-8">
+          <div>
+            <h2 class="text-2xl font-bold mb-1">Students</h2>
+            <p class="text-slate-500">Manage and monitor all registered students.</p>
+          </div>
+          <button class="px-4 py-2 bg-primary text-white rounded-lg font-semibold text-sm hover:bg-primary/90 transition-colors flex items-center gap-2">
+            <span class="material-symbols-outlined" style="font-size:16px">add</span> Add Student
+          </button>
+        </div>
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 text-xs uppercase font-bold">
+                  <th class="px-6 py-4">Student</th>
+                  <th class="px-6 py-4">ID</th>
+                  <th class="px-6 py-4">Tests Completed</th>
+                  <th class="px-6 py-4">Avg Score</th>
+                  <th class="px-6 py-4">Status</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 dark:divide-slate-800" id="studentsTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Violations -->
+      <div id="section-violations" class="hidden">
+        <h2 class="text-2xl font-bold mb-2">Rule Breakers</h2>
+        <p class="text-slate-500 mb-8">All flagged examination misconduct incidents.</p>
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+          <div class="overflow-x-auto" id="fullIncidentsTable"></div>
+        </div>
+      </div>
+
+    </div><!-- end scrollable -->
+  </main>
+</div>
+
+<script>
+// Theme
+function applyTheme() {
+  const stored = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const isDark = stored === 'dark' || (!stored && prefersDark);
+  document.documentElement.classList.toggle('dark', isDark);
+  document.getElementById('themeIcon').textContent = isDark ? 'light_mode' : 'dark_mode';
+}
+applyTheme();
+document.getElementById('themeToggle').addEventListener('click', () => {
+  const isDark = document.documentElement.classList.toggle('dark');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  document.getElementById('themeIcon').textContent = isDark ? 'light_mode' : 'dark_mode';
+});
+
+// Last updated
+document.getElementById('lastUpdated').textContent = new Date().toLocaleTimeString();
+setInterval(() => { document.getElementById('lastUpdated').textContent = new Date().toLocaleTimeString(); }, 60000);
+
+// ===== SECTIONS =====
+function showSection(name, linkEl) {
+  ['dashboard','analytics','students','violations'].forEach(s => {
+    document.getElementById('section-' + s).classList.toggle('hidden', s !== name);
+  });
+  // Update sidebar active state
+  if (linkEl) {
+    document.querySelectorAll('#sidebarNav a').forEach(a => {
+      a.classList.remove('bg-primary/10', 'text-primary', 'font-medium');
+      a.classList.add('text-slate-600', 'dark:text-slate-400');
+    });
+    linkEl.classList.add('bg-primary/10', 'text-primary', 'font-medium');
+    linkEl.classList.remove('text-slate-600', 'dark:text-slate-400');
+  }
+  if (name === 'students') renderStudents();
+  if (name === 'violations') renderFullIncidents();
+  return false;
+}
+
+// ===== DATA =====
+const INCIDENTS = [
+  { id: 1, name: 'Marcus Wright', studentId: 'ST-9821', violation: 'External Browser Tab Detection', testId: 'MATH-302', time: '2 mins ago', severity: 'medium', avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBMc1zxG6sSGXCL-_pUtN5rBL8zCrqUrilxyqUKC40rCPnY1vxBdGmKe5NBlbwp21dd9FmfXDrpWOKZgQ2j0qGeVBKcmtHOFN1bEEwD_Hdg1ZabirDW6cziaKxJwIwwvRaYWwyVwkPx-aQuCpFx5Woo3FwPqxcGPgc8vlYyGsprNDsxdRIHGaSTyWJSSA6LoO4Y0BToJlPvw0Ea1Jd7uyEUc6xu0Fmh3ZYKPSCgmw4gI-Y8DSZIWoddiebkHZndANfONS5WMi0_AIRI' },
+  { id: 2, name: 'Sarah Chen', studentId: 'ST-5542', violation: 'Prohibited Device Detected', testId: 'PHYS-101', time: '14 mins ago', severity: 'high', avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD2xG5RqktmO1ePKgAjxxadcHDJ8w7QZp6l3PV6lIXWNeFCVLvDobwgYXCCOt3LB81e9dM7YaHte_Q99ObF9sh0PPmrR5D8gXzDkrP33D4jmy8Fh-wwuos9iN6YTufw4n6Okllgg-4ipEIIbOfTLnJSaewyfu-LXHIpbx1u6qJX8xvu4v33Nn_H_nKoOd2of3SDaNPSZ8jyjYkYxM1KlpYmJwAVMwY-lXYJvvADxmsDWs6d6km-aKHpFeCKteSs-D63vsIevSB_jxF6' },
+  { id: 3, name: 'James Miller', studentId: 'ST-2109', violation: 'Face Spoofing Attempt', testId: 'CS-405', time: '42 mins ago', severity: 'high', avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCzOR5iRpH-mHNtexqNkxz3KxvoPfWBIAxceRc8gqZazW6BezQIh4ADQhEVVqK3kBbHJenRkoOZ4pDO6yp4VREVZ_NQE1Y9AB5TUNXxm-PVKjcy0_bnZpx14Pi7PUrftIXe6rXDyjpa5W1M5fxQP0uZqVQI6zgBtkmvnHa-xURlJ_B4kf6-ILU43sCjBbsbnGoAvb0BQwFrA2eJxTY2PX6W2TsKj_zB4V590EfZVbUMmp1hqucEWOgxjzw_B3-UEbLWPLZishBRENMz' },
+  { id: 4, name: 'Elena Rossi', studentId: 'ST-7731', violation: 'Multiple Faces Detected', testId: 'LIT-200', time: '1 hour ago', severity: 'medium', avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCU6d0dw3P5Ft0z3sqYmGSaPJFzdRADSQjjuGEGtiQ5sw2EKjb0nlr7PeIMBDxpHKz8Ld7OknOHKQVdyvt_aN6qt27Bb-2bGita-ULj4Y7rORsDK774SpcCXIsCGtp_1atb7cuTVOgStK5MyzwY1VP-oBcMrKUGE4GaF5VDLW0MURgjvaMzqxhZeiXZlOljRABVKXMESCOxrFFPBHXLzM_24uq29Pm-OoSuqtPn4MNVY8SPDw4Rvw8L2wmaFfAi5tLWr8rUFwBRPzQQ' },
+  { id: 5, name: 'David Park', studentId: 'ST-3390', violation: 'Copy-Paste Activity Detected', testId: 'ECON-310', time: '2 hours ago', severity: 'low', avatar: '' },
+  { id: 6, name: 'Mia Torres', studentId: 'ST-8812', violation: 'Screen Recording Detected', testId: 'BIO-201', time: '3 hours ago', severity: 'high', avatar: '' },
+];
+
+const SUBJECTS = [
+  { name: 'Mathematics', students: 4200, pct: 88, color: 'bg-primary' },
+  { name: 'Computer Science', students: 3150, pct: 75, color: 'bg-indigo-400' },
+  { name: 'Literature', students: 1890, pct: 45, color: 'bg-amber-400' },
+  { name: 'Physics', students: 2400, pct: 62, color: 'bg-emerald-400' },
+  { name: 'Economics', students: 2100, pct: 58, color: 'bg-blue-400' },
+];
+
+const CHART_DATA = {
+  'Last 7 days': [65, 45, 85, 35, 55, 20, 30],
+  'Last 30 days': [55, 72, 68, 80, 60, 75, 90, 45, 65, 70, 55, 85],
+  'Last 6 months': [65, 70, 68, 78, 82, 88],
+};
+const CHART_LABELS = {
+  'Last 7 days': ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+  'Last 30 days': ['W1','W2','W3','W4','W5','W6','W7','W8','W9','W10','W11','W12'],
+  'Last 6 months': ['Jan','Feb','Mar','Apr','May','Jun'],
+};
+
+// ===== BAR CHART =====
+function renderChart(period) {
+  const data = CHART_DATA[period] || CHART_DATA['Last 7 days'];
+  const labels = CHART_LABELS[period] || CHART_LABELS['Last 7 days'];
+  const max = Math.max(...data);
+  const container = document.getElementById('barChart');
+  container.innerHTML = '';
+  data.forEach((val, i) => {
+    const isHighest = val === max;
+    const col = document.createElement('div');
+    col.className = 'flex-1 flex flex-col items-center gap-2 group cursor-pointer';
+    col.innerHTML = `
+      <div class="relative w-full flex items-end justify-center">
+        <div class="hidden group-hover:block absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] font-bold px-2 py-1 rounded whitespace-nowrap">${val}%</div>
+        <div class="w-full ${isHighest ? 'bg-primary' : 'bg-primary/20'} group-hover:bg-primary/60 transition-all rounded-t-lg"
+          style="height:${(val/100)*13}rem; transition: height 0.5s ease"></div>
+      </div>
+      <span class="text-[10px] text-slate-500 uppercase font-bold">${labels[i]}</span>
+    `;
+    container.appendChild(col);
+  });
+}
+renderChart('Last 7 days');
+document.getElementById('chartPeriod').addEventListener('change', function() { renderChart(this.value); });
+
+// Analytics section chart
+function renderAnalyticsChart() {
+  const data = [72, 68, 78, 82, 75, 88, 70, 85, 91, 76, 83, 79];
+  const labels = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const container = document.getElementById('analyticsChart');
+  if (!container) return;
+  container.innerHTML = '';
+  const max = Math.max(...data);
+  data.forEach((val, i) => {
+    const col = document.createElement('div');
+    col.className = 'flex-1 flex flex-col items-center gap-2 group';
+    col.innerHTML = `
+      <div class="w-full bg-primary/30 group-hover:bg-primary transition-all rounded-t-lg" style="height:${(val/max)*10}rem"></div>
+      <span class="text-[9px] text-slate-500 uppercase font-bold">${labels[i]}</span>
+    `;
+    container.appendChild(col);
+  });
+}
+
+// ===== SUBJECT BARS =====
+function renderSubjectBars() {
+  const container = document.getElementById('subjectBars');
+  container.innerHTML = '';
+  SUBJECTS.forEach(s => {
+    const div = document.createElement('div');
+    div.className = 'space-y-1';
+    div.innerHTML = `
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-600 dark:text-slate-400">${s.name}</span>
+        <span class="font-bold">${s.students.toLocaleString()} (${s.pct}%)</span>
+      </div>
+      <div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+        <div class="h-full ${s.color} rounded-full transition-all duration-700" style="width:${s.pct}%"></div>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+renderSubjectBars();
+
+// ===== INCIDENTS TABLE =====
+function buildIncidentsTable(incidents, containerId) {
+  const container = document.getElementById(containerId);
+  const table = document.createElement('table');
+  table.className = 'w-full text-left';
+  table.innerHTML = `
+    <thead>
+      <tr class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 text-xs uppercase font-bold">
+        <th class="px-6 py-4">Student</th>
+        <th class="px-6 py-4">Violation Type</th>
+        <th class="px-6 py-4">Test ID</th>
+        <th class="px-6 py-4">Time</th>
+        <th class="px-6 py-4">Severity</th>
+        <th class="px-6 py-4">Action</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-slate-200 dark:divide-slate-800"></tbody>
+  `;
+  const tbody = table.querySelector('tbody');
+
+  incidents.forEach(inc => {
+    const severityClasses = {
+      high: 'bg-red-500/10 text-red-600',
+      medium: 'bg-amber-500/10 text-amber-600',
+      low: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400'
+    };
+    const initials = inc.name.split(' ').map(n => n[0]).join('');
+    const row = document.createElement('tr');
+    row.className = 'hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors incident-row';
+    row.innerHTML = `
+      <td class="px-6 py-4">
+        <div class="flex items-center gap-3">
+          <div class="size-8 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xs font-bold overflow-hidden flex-shrink-0">
+            ${inc.avatar ? `<img src="${inc.avatar}" class="w-full h-full object-cover" alt="${inc.name}"/>` : initials}
+          </div>
+          <div class="text-sm">
+            <p class="font-semibold">${inc.name}</p>
+            <p class="text-xs text-slate-500">ID: #${inc.studentId}</p>
+          </div>
+        </div>
+      </td>
+      <td class="px-6 py-4 text-sm">${inc.violation}</td>
+      <td class="px-6 py-4 text-sm font-mono text-primary">${inc.testId}</td>
+      <td class="px-6 py-4 text-sm text-slate-500">${inc.time}</td>
+      <td class="px-6 py-4">
+        <span class="px-2 py-1 ${severityClasses[inc.severity] || ''} text-[10px] font-bold rounded-full uppercase">${inc.severity}</span>
+      </td>
+      <td class="px-6 py-4">
+        <div class="flex gap-1">
+          <button class="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-colors" title="View details"
+            onclick="toggleDetail(${inc.id}, '${containerId}')">
+            <span class="material-symbols-outlined text-slate-400 leading-none" style="font-size:18px">visibility</span>
+          </button>
+          <button class="p-1.5 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors" title="Dismiss"
+            onclick="this.closest('tr').remove()">
+            <span class="material-symbols-outlined text-slate-400 hover:text-red-500 leading-none" style="font-size:18px">close</span>
+          </button>
+        </div>
+      </td>
+    `;
+
+    // Detail row
+    const detailRow = document.createElement('tr');
+    detailRow.id = 'detail-' + inc.id + '-' + containerId;
+    detailRow.className = 'incident-detail bg-slate-50 dark:bg-slate-800/30';
+    detailRow.innerHTML = `
+      <td colspan="6" class="px-6 py-4">
+        <div class="flex items-center gap-4 text-sm text-slate-600 dark:text-slate-400">
+          <span class="material-symbols-outlined text-primary">info</span>
+          <span>Incident detected at <strong>${inc.time}</strong> during test <strong>${inc.testId}</strong>. Violation type: <strong>${inc.violation}</strong>. Student automatically locked out.</span>
+          <button class="ml-auto px-3 py-1 bg-primary text-white rounded-lg text-xs font-bold hover:bg-primary/90">Notify Student</button>
+          <button class="px-3 py-1 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-bold hover:bg-slate-100 dark:hover:bg-slate-700">Flag for Review</button>
+        </div>
+      </td>
+    `;
+
+    tbody.appendChild(row);
+    tbody.appendChild(detailRow);
+  });
+
+  container.appendChild(table);
+}
+
+function toggleDetail(id, containerId) {
+  const el = document.getElementById('detail-' + id + '-' + containerId);
+  if (el) el.classList.toggle('open');
+}
+
+buildIncidentsTable(INCIDENTS.slice(0, 4), 'incidentsTableContainer');
+
+function renderFullIncidents() {
+  const container = document.getElementById('fullIncidentsTable');
+  container.innerHTML = '';
+  buildIncidentsTable(INCIDENTS, 'fullIncidentsTable');
+}
+
+// ===== STUDENTS =====
+const STUDENTS = [
+  { name: 'Marcus Wright', id: 'ST-9821', completed: 8, avg: 72, status: 'flagged' },
+  { name: 'Sarah Chen', id: 'ST-5542', completed: 12, avg: 88, status: 'flagged' },
+  { name: 'James Miller', id: 'ST-2109', completed: 5, avg: 65, status: 'flagged' },
+  { name: 'Elena Rossi', id: 'ST-7731', completed: 10, avg: 91, status: 'active' },
+  { name: 'David Park', id: 'ST-3390', completed: 7, avg: 79, status: 'active' },
+  { name: 'Mia Torres', id: 'ST-8812', completed: 9, avg: 84, status: 'active' },
+  { name: 'Liam Johnson', id: 'ST-1102', completed: 11, avg: 93, status: 'active' },
+  { name: 'Aisha Patel', id: 'ST-6647', completed: 6, avg: 77, status: 'inactive' },
+];
+
+function renderStudents() {
+  const tbody = document.getElementById('studentsTable');
+  tbody.innerHTML = '';
+  STUDENTS.forEach(s => {
+    const statusClasses = { active: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400', flagged: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400', inactive: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400' };
+    const row = document.createElement('tr');
+    row.className = 'hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors';
+    row.innerHTML = `
+      <td class="px-6 py-4">
+        <div class="flex items-center gap-3">
+          <div class="size-9 rounded-full bg-primary/10 flex items-center justify-center text-primary text-sm font-bold">${s.name.split(' ').map(n=>n[0]).join('')}</div>
+          <span class="font-semibold text-sm">${s.name}</span>
+        </div>
+      </td>
+      <td class="px-6 py-4 text-sm text-slate-500">#${s.id}</td>
+      <td class="px-6 py-4 text-sm font-semibold">${s.completed}</td>
+      <td class="px-6 py-4">
+        <div class="flex items-center gap-2">
+          <div class="w-16 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+            <div class="h-full rounded-full ${s.avg >= 80 ? 'bg-emerald-500' : s.avg >= 70 ? 'bg-amber-500' : 'bg-red-500'}" style="width:${s.avg}%"></div>
+          </div>
+          <span class="text-sm font-bold">${s.avg}%</span>
+        </div>
+      </td>
+      <td class="px-6 py-4">
+        <span class="px-2 py-1 ${statusClasses[s.status]} text-[10px] font-bold rounded-full uppercase">${s.status}</span>
+      </td>
+    `;
+    tbody.appendChild(row);
+  });
+}
+
+// ===== SEARCH =====
+document.getElementById('adminSearch').addEventListener('input', function() {
+  const q = this.value.toLowerCase();
+  // Filter visible incident rows
+  document.querySelectorAll('.incident-row').forEach(row => {
+    const text = row.textContent.toLowerCase();
+    row.style.display = !q || text.includes(q) ? '' : 'none';
+  });
+});
+
+// Init analytics chart when that section is opened (called lazily)
+const origShowSection = window.showSection;
+</script>
+</body>
+</html>

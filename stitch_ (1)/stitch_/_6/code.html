@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4848e5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>Test Constructor Pro</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex h-full min-h-screen w-full flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 lg:px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8 flex items-center justify-center bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined">quiz</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">Test Constructor</h2>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="#">Tests</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Templates</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Analytics</a>
+</nav>
+<div class="flex gap-2">
+<button class="flex size-10 cursor-pointer items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-xl">notifications</span>
+</button>
+<button class="flex size-10 cursor-pointer items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-xl">settings</span>
+</button>
+</div>
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20 overflow-hidden">
+<img alt="User Avatar" class="size-full object-cover" data-alt="Professional user profile avatar photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHsv7u6ISUPCItQ0ppBYfEwcUCYOX9cm_ty067YcXcN9LNZs7nSkAtCuXpePRp9TTrvguTMU5bZpD48Y6WOL4uJIx8X_vsoR3hO6cGfkhAbrtDuwGXRF-YIeurHf68Tq_6WgYjjFGrt4uD4mpt44gHHqBsiv8D16ZFKDl_bXkrCeedhLFH6mMAX5ww4-0mMQDEm9V83DJEILL0VOjufc-c1m6wrdzBnKOBpIkaPSXVgdo7MWSHbsvK4e7k67AUyABPB5eKKZPcO7Uv"/>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar -->
+<aside class="hidden lg:flex w-64 flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 gap-6">
+<div>
+<h3 class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest px-3 mb-2">Workspace</h3>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary font-semibold" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="text-sm">Current Draft</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" href="#">
+<span class="material-symbols-outlined">cloud_done</span>
+<span class="text-sm">Published</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-sm">Archived</span>
+</a>
+</div>
+</div>
+<div>
+<h3 class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest px-3 mb-2">Resources</h3>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" href="#">
+<span class="material-symbols-outlined">database</span>
+<span class="text-sm">Question Bank</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="text-sm">AI Generator</span>
+</a>
+</div>
+</div>
+<div class="mt-auto p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
+<p class="text-xs text-slate-500 dark:text-slate-400 font-medium mb-1">Storage used</p>
+<div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full mb-2">
+<div class="bg-primary h-full rounded-full" style="width: 65%"></div>
+</div>
+<p class="text-[10px] text-slate-400 dark:text-slate-500">650 / 1000 Questions</p>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark p-6 lg:p-10">
+<div class="max-w-4xl mx-auto space-y-8">
+<!-- Header Actions -->
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-6">
+<div class="space-y-1">
+<nav class="flex text-xs text-slate-400 dark:text-slate-500 gap-2 items-center mb-2 font-medium">
+<span>Tests</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary">New Assessment</span>
+</nav>
+<h1 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Engineering Certification 2024</h1>
+<p class="text-slate-500 dark:text-slate-400">Design your assessment by adding questions or importing data.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-semibold flex items-center gap-2 hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-sm">visibility</span> Preview
+                            </button>
+<button class="px-6 py-2 rounded-lg bg-primary text-white text-sm font-bold flex items-center gap-2 hover:opacity-90 transition-opacity shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-sm">rocket_launch</span> Publish
+                            </button>
+</div>
+</div>
+<!-- Import Zone -->
+<div class="bg-white dark:bg-slate-900 border-2 border-dashed border-primary/30 rounded-xl p-8 text-center space-y-4 hover:border-primary/60 transition-colors group cursor-pointer">
+<div class="size-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">upload_file</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold">Import from file</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 max-w-sm mx-auto">Drop your Excel, CSV, or JSON file here to batch upload questions instantly.</p>
+</div>
+<div class="flex items-center justify-center gap-2 pt-2">
+<span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded text-[10px] font-bold text-slate-500 uppercase tracking-wider">.xls</span>
+<span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded text-[10px] font-bold text-slate-500 uppercase tracking-wider">.csv</span>
+<span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded text-[10px] font-bold text-slate-500 uppercase tracking-wider">.json</span>
+</div>
+</div>
+<!-- Questions Constructor -->
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<h2 class="text-xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">list_alt</span> Questions (3)
+                            </h2>
+<div class="flex gap-2">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">sort</span>
+</button>
+</div>
+</div>
+<!-- Question Item 1 (Single Choice) -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 relative group hover:shadow-md transition-shadow">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-l-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="absolute left-[-32px] top-1/2 -translate-y-1/2 text-slate-300 dark:text-slate-700 cursor-grab opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<span class="flex items-center justify-center size-6 rounded bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-500">1</span>
+<span class="px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-[10px] font-bold uppercase tracking-wider">Single Choice</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 transition-colors">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+</button>
+<button class="p-1.5 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</div>
+<input class="w-full bg-transparent border-0 border-b border-transparent focus:border-primary focus:ring-0 p-0 text-lg font-semibold text-slate-900 dark:text-white placeholder:text-slate-300" placeholder="Type your question here..." type="text" value="Define the core principles of thermodynamic equilibrium?"/>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+<div class="flex items-center gap-3 p-3 rounded-lg border border-primary bg-primary/5">
+<div class="size-4 rounded-full border-2 border-primary flex items-center justify-center">
+<div class="size-2 rounded-full bg-primary"></div>
+</div>
+<input class="bg-transparent border-0 focus:ring-0 p-0 text-sm flex-1" type="text" value="System remains static in all states"/>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-800 hover:border-primary/40">
+<div class="size-4 rounded-full border-2 border-slate-300 dark:border-slate-700"></div>
+<input class="bg-transparent border-0 focus:ring-0 p-0 text-sm flex-1" type="text" value="Energy is constantly added"/>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-800 hover:border-primary/40">
+<div class="size-4 rounded-full border-2 border-slate-300 dark:border-slate-700"></div>
+<input class="bg-transparent border-0 focus:ring-0 p-0 text-sm flex-1" type="text" value="Pressure exceeds atmospheric level"/>
+</div>
+<button class="flex items-center justify-center gap-2 p-3 rounded-lg border-2 border-dashed border-slate-200 dark:border-slate-800 text-slate-400 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-sm">add</span> Add Option
+                                    </button>
+</div>
+</div>
+</div>
+<!-- Question Item 2 (Multiple Choice) -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 relative group hover:shadow-md transition-shadow">
+<div class="absolute left-[-32px] top-1/2 -translate-y-1/2 text-slate-300 dark:text-slate-700 cursor-grab opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<span class="flex items-center justify-center size-6 rounded bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-500">2</span>
+<span class="px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-[10px] font-bold uppercase tracking-wider">Multiple Choice</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 transition-colors">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+</button>
+<button class="p-1.5 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</div>
+<input class="w-full bg-transparent border-0 border-b border-transparent focus:border-primary focus:ring-0 p-0 text-lg font-semibold text-slate-900 dark:text-white placeholder:text-slate-300" type="text" value="Which of these components are required for a standard PV system?"/>
+<div class="space-y-2 mt-2">
+<div class="flex items-center justify-between p-3 rounded-lg border border-primary bg-primary/5">
+<div class="flex items-center gap-3 flex-1">
+<div class="size-4 rounded bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[12px] font-bold">check</span>
+</div>
+<input class="bg-transparent border-0 focus:ring-0 p-0 text-sm flex-1" type="text" value="Inverter Unit"/>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg border border-primary bg-primary/5">
+<div class="flex items-center gap-3 flex-1">
+<div class="size-4 rounded bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[12px] font-bold">check</span>
+</div>
+<input class="bg-transparent border-0 focus:ring-0 p-0 text-sm flex-1" type="text" value="Solar Panels"/>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 flex-1">
+<div class="size-4 rounded border-2 border-slate-300 dark:border-slate-700"></div>
+<input class="bg-transparent border-0 focus:ring-0 p-0 text-sm flex-1" type="text" value="Gas Turbine"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Question Item 3 (Open Text) -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 relative group hover:shadow-md transition-shadow">
+<div class="absolute left-[-32px] top-1/2 -translate-y-1/2 text-slate-300 dark:text-slate-700 cursor-grab opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<span class="flex items-center justify-center size-6 rounded bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-500">3</span>
+<span class="px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wider">Free Text</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 transition-colors">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+</button>
+<button class="p-1.5 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</div>
+<input class="w-full bg-transparent border-0 border-b border-transparent focus:border-primary focus:ring-0 p-0 text-lg font-semibold text-slate-900 dark:text-white placeholder:text-slate-300" type="text" value="Explain the impact of material fatigue in high-altitude aeronautics."/>
+<div class="w-full h-24 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-800 flex items-center justify-center p-4">
+<p class="text-xs text-slate-400 dark:text-slate-500 text-center italic">Respondents will see a multi-line text area here. Max characters: 5000.</p>
+</div>
+</div>
+</div>
+<!-- Add Question Trigger -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-4">
+<div class="h-px flex-1 bg-slate-200 dark:bg-slate-800"></div>
+<span class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Select Question Type</span>
+<div class="h-px flex-1 bg-slate-200 dark:bg-slate-800"></div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<button class="flex flex-col items-center gap-2 p-4 rounded-xl border-2 border-slate-100 dark:border-slate-800 hover:border-primary hover:bg-primary/5 transition-all group">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">radio_button_checked</span>
+<span class="text-sm font-bold">Single Choice</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-4 rounded-xl border-2 border-slate-100 dark:border-slate-800 hover:border-primary hover:bg-primary/5 transition-all group">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">check_box</span>
+<span class="text-sm font-bold">Multiple Choice</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-4 rounded-xl border-2 border-slate-100 dark:border-slate-800 hover:border-primary hover:bg-primary/5 transition-all group">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">notes</span>
+<span class="text-sm font-bold">Free Text</span>
+</button>
+</div>
+<button class="w-full py-4 rounded-xl bg-primary text-white font-black text-lg flex items-center justify-center gap-2 shadow-xl shadow-primary/20 hover:scale-[1.01] transition-transform">
+<span class="material-symbols-outlined">add_circle</span> Add First Question
+                            </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

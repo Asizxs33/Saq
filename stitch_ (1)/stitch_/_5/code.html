@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EduAdmin | Analytics Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4848e5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-size: 24px; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col">
+<div class="p-6">
+<div class="flex items-center gap-3 mb-8">
+<div class="bg-primary size-10 rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">school</span>
+</div>
+<div>
+<h1 class="text-slate-900 dark:text-white text-lg font-bold leading-none">EduAdmin</h1>
+<p class="text-slate-500 text-xs mt-1">System Management</p>
+</div>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-medium" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-sm">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm">Students</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">quiz</span>
+<span class="text-sm">Tests &amp; Exams</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">report</span>
+<span class="text-sm">Rule Breakers</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-6 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center" data-alt="User profile avatar of administrator" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDkm-DDP9m73YyvmQY7WLO2tEurzTRWBYifUmwt1q2gZPrpXLI7WjvIJAL7pajmuwnBgDbx7XU8fQU0BsBCD8pi3pg8l3rVaqGUYUVo7apOvoZFeKodRaoGuic38plo9_wdjYmrRgj19IfdydXd8ThUbcuYuX9C-JqWvcnEqZ_sx_mGAeT-vGyw-XEKi5gkNF0z68wsGMmzbq-VRpVJ5MyVkzObFqs3_2EvOFQmkh_7cF_mJhq_zPhYgnXPbvKnEu5reO7pvhvABUer')"></div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">Alex Johnson</p>
+<p class="text-xs text-slate-500 truncate">Super Admin</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 cursor-pointer">settings</span>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col overflow-y-auto">
+<!-- Header -->
+<header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-8 flex items-center justify-between sticky top-0 z-10">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/50" placeholder="Search analytics, students, or incidents..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+<button class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-primary/90 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">download</span>
+                    Export PDF
+                </button>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-8">
+<div class="mb-8">
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white">Analytics Overview</h2>
+<p class="text-slate-500">Real-time monitoring and student performance metrics.</p>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">group</span>
+</div>
+<span class="text-emerald-500 text-xs font-bold bg-emerald-500/10 px-2 py-1 rounded-full">+12%</span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Total Students</p>
+<p class="text-2xl font-bold mt-1">12,450</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">timer</span>
+</div>
+<span class="text-emerald-500 text-xs font-bold bg-emerald-500/10 px-2 py-1 rounded-full">+5.2%</span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Active Tests</p>
+<p class="text-2xl font-bold mt-1">86</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<span class="text-red-500 text-xs font-bold bg-red-500/10 px-2 py-1 rounded-full">-2.4%</span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Avg. Score</p>
+<p class="text-2xl font-bold mt-1">78.4%</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<span class="text-emerald-500 text-xs font-bold bg-emerald-500/10 px-2 py-1 rounded-full">+15%</span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Flagged Incidents</p>
+<p class="text-2xl font-bold mt-1">24</p>
+</div>
+</div>
+<!-- Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-bold text-lg">Student Performance Trend</h3>
+<select class="text-xs bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg focus:ring-primary">
+<option>Last 30 days</option>
+<option>Last 6 months</option>
+</select>
+</div>
+<div class="h-64 flex items-end gap-2 px-2">
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/20 group-hover:bg-primary/40 transition-all rounded-t-lg" style="height: 65%"></div>
+<span class="text-[10px] text-slate-500 uppercase font-bold">Mon</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/20 group-hover:bg-primary/40 transition-all rounded-t-lg" style="height: 45%"></div>
+<span class="text-[10px] text-slate-500 uppercase font-bold">Tue</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary group-hover:bg-primary/90 transition-all rounded-t-lg" style="height: 85%"></div>
+<span class="text-[10px] text-slate-500 uppercase font-bold">Wed</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/20 group-hover:bg-primary/40 transition-all rounded-t-lg" style="height: 35%"></div>
+<span class="text-[10px] text-slate-500 uppercase font-bold">Thu</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/20 group-hover:bg-primary/40 transition-all rounded-t-lg" style="height: 55%"></div>
+<span class="text-[10px] text-slate-500 uppercase font-bold">Fri</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/20 group-hover:bg-primary/40 transition-all rounded-t-lg" style="height: 20%"></div>
+<span class="text-[10px] text-slate-500 uppercase font-bold">Sat</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/20 group-hover:bg-primary/40 transition-all rounded-t-lg" style="height: 30%"></div>
+<span class="text-[10px] text-slate-500 uppercase font-bold">Sun</span>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-bold text-lg">Subject Participation</h3>
+<span class="material-symbols-outlined text-slate-400 cursor-pointer">more_horiz</span>
+</div>
+<div class="space-y-4">
+<div class="space-y-2">
+<div class="flex justify-between text-sm">
+<span class="text-slate-600 dark:text-slate-400">Mathematics</span>
+<span class="font-bold">4,200 (88%)</span>
+</div>
+<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 88%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm">
+<span class="text-slate-600 dark:text-slate-400">Computer Science</span>
+<span class="font-bold">3,150 (75%)</span>
+</div>
+<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 75%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm">
+<span class="text-slate-600 dark:text-slate-400">Literature</span>
+<span class="font-bold">1,890 (45%)</span>
+</div>
+<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 45%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm">
+<span class="text-slate-600 dark:text-slate-400">Physics</span>
+<span class="font-bold">2,400 (62%)</span>
+</div>
+<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 62%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Rule Breakers Table -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+<div class="p-6 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
+<div>
+<h3 class="font-bold text-lg">Recent Rule Breakers</h3>
+<p class="text-sm text-slate-500">List of students flagged for examination misconduct.</p>
+</div>
+<button class="text-primary text-sm font-semibold hover:underline">View All Reports</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 text-xs uppercase font-bold">
+<th class="px-6 py-4">Student</th>
+<th class="px-6 py-4">Violation Type</th>
+<th class="px-6 py-4">Test ID</th>
+<th class="px-6 py-4">Time</th>
+<th class="px-6 py-4">Severity</th>
+<th class="px-6 py-4">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover" data-alt="Profile photo of Marcus Wright" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBMc1zxG6sSGXCL-_pUtN5rBL8zCrqUrilxyqUKC40rCPnY1vxBdGmKe5NBlbwp21dd9FmfXDrpWOKZgQ2j0qGeVBKcmtHOFN1bEEwD_Hdg1ZabirDW6cziaKxJwIwwvRaYWwyVwkPx-aQuCpFx5Woo3FwPqxcGPgc8vlYyGsprNDsxdRIHGaSTyWJSSA6LoO4Y0BToJlPvw0Ea1Jd7uyEUc6xu0Fmh3ZYKPSCgmw4gI-Y8DSZIWoddiebkHZndANfONS5WMi0_AIRI')"></div>
+<div class="text-sm">
+<p class="font-semibold">Marcus Wright</p>
+<p class="text-xs text-slate-500">ID: #ST-9821</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm">External Browser Tab Detection</td>
+<td class="px-6 py-4 text-sm font-mono text-primary">MATH-302</td>
+<td class="px-6 py-4 text-sm text-slate-500">2 mins ago</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-amber-500/10 text-amber-600 text-[10px] font-bold rounded-full uppercase">Medium</span>
+</td>
+<td class="px-6 py-4">
+<button class="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-colors">
+<span class="material-symbols-outlined text-slate-400 text-lg leading-none">visibility</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover" data-alt="Profile photo of Sarah Chen" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD2xG5RqktmO1ePKgAjxxadcHDJ8w7QZp6l3PV6lIXWNeFCVLvDobwgYXCCOt3LB81e9dM7YaHte_Q99ObF9sh0PPmrR5D8gXzDkrP33D4jmy8Fh-wwuos9iN6YTufw4n6Okllgg-4ipEIIbOfTLnJSaewyfu-LXHIpbx1u6qJX8xvu4v33Nn_H_nKoOd2of3SDaNPSZ8jyjYkYxM1KlpYmJwAVMwY-lXYJvvADxmsDWs6d6km-aKHpFeCKteSs-D63vsIevSB_jxF6')"></div>
+<div class="text-sm">
+<p class="font-semibold">Sarah Chen</p>
+<p class="text-xs text-slate-500">ID: #ST-5542</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm">Prohibited Device Detected</td>
+<td class="px-6 py-4 text-sm font-mono text-primary">PHYS-101</td>
+<td class="px-6 py-4 text-sm text-slate-500">14 mins ago</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-red-500/10 text-red-600 text-[10px] font-bold rounded-full uppercase">High</span>
+</td>
+<td class="px-6 py-4">
+<button class="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-colors">
+<span class="material-symbols-outlined text-slate-400 text-lg leading-none">visibility</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover" data-alt="Profile photo of James Miller" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCzOR5iRpH-mHNtexqNkxz3KxvoPfWBIAxceRc8gqZazW6BezQIh4ADQhEVVqK3kBbHJenRkoOZ4pDO6yp4VREVZ_NQE1Y9AB5TUNXxm-PVKjcy0_bnZpx14Pi7PUrftIXe6rXDyjpa5W1M5fxQP0uZqVQI6zgBtkmvnHa-xURlJ_B4kf6-ILU43sCjBbsbnGoAvb0BQwFrA2eJxTY2PX6W2TsKj_zB4V590EfZVbUMmp1hqucEWOgxjzw_B3-UEbLWPLZishBRENMz')"></div>
+<div class="text-sm">
+<p class="font-semibold">James Miller</p>
+<p class="text-xs text-slate-500">ID: #ST-2109</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm">Face Spoofing Attempt</td>
+<td class="px-6 py-4 text-sm font-mono text-primary">CS-405</td>
+<td class="px-6 py-4 text-sm text-slate-500">42 mins ago</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-red-500/10 text-red-600 text-[10px] font-bold rounded-full uppercase">High</span>
+</td>
+<td class="px-6 py-4">
+<button class="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-colors">
+<span class="material-symbols-outlined text-slate-400 text-lg leading-none">visibility</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover" data-alt="Profile photo of Elena Rossi" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCU6d0dw3P5Ft0z3sqYmGSaPJFzdRADSQjjuGEGtiQ5sw2EKjb0nlr7PeIMBDxpHKz8Ld7OknOHKQVdyvt_aN6qt27Bb-2bGita-ULj4Y7rORsDK774SpcCXIsCGtp_1atb7cuTVOgStK5MyzwY1VP-oBcMrKUGE4GaF5VDLW0MURgjvaMzqxhZeiXZlOljRABVKXMESCOxrFFPBHXLzM_24uq29Pm-OoSuqtPn4MNVY8SPDw4Rvw8L2wmaFfAi5tLWr8rUFwBRPzQQ')"></div>
+<div class="text-sm">
+<p class="font-semibold">Elena Rossi</p>
+<p class="text-xs text-slate-500">ID: #ST-7731</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm">Multiple Faces Detected</td>
+<td class="px-6 py-4 text-sm font-mono text-primary">LIT-200</td>
+<td class="px-6 py-4 text-sm text-slate-500">1 hour ago</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-amber-500/10 text-amber-600 text-[10px] font-bold rounded-full uppercase">Medium</span>
+</td>
+<td class="px-6 py-4">
+<button class="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-colors">
+<span class="material-symbols-outlined text-slate-400 text-lg leading-none">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

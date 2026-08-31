@@ -1,0 +1,258 @@
+{
+  "cached_at": "2026-07-22T18:37:05.275776+00:00",
+  "investigation_id": 515,
+  "query": "Crowd1",
+  "detected_type": "username",
+  "connectors_run": [
+    "searx_metasearch",
+    "duckduckgo_instant_answer",
+    "regulator_blacklist_local",
+    "username_enumeration",
+    "threat_actor_username_search",
+    "onionclaw_darknet_search"
+  ],
+  "results": [
+    {
+      "source": "searx_metasearch",
+      "ok": true,
+      "data": {
+        "engine_count": null,
+        "results": [
+          {
+            "title": "Unmasking the Pyramid Kings: Crowd1 scam targets Africa - Facebook",
+            "url": "https://www.facebook.com/BBCnewsafrica/videos/unmasking-the-pyramid-kings-crowd1-scam-targets-africa-bbc-africa-eye/2811937849095690/",
+            "content": "2020 ж. 02 қар. ... Crowd1 is the most audacious scam we've ever seen. It looks like a high-tech marketing business that's making a ton of money for people across Africa."
+          },
+          {
+            "title": "В Актюбинской области выявлена компания «Crowd 1 - GOV.KZ",
+            "url": "https://www.gov.kz/memleket/entities/afm/press/news/details/292044?lang=ru",
+            "content": "В Актюбинской области выявлена компания «Crowd 1» с признаками финансовой пирамиды ... Your browser can't play this video. ... Создание и организация финансовой ..."
+          },
+          {
+            "title": "Unmasking the Pyramid Kings: Crowd1 scam targets Africa - YouTube",
+            "url": "https://www.youtube.com/watch?v=M0EjjArvzXA",
+            "content": "2020 ж. 01 қар. ... The best scams always come in disguise. And Crowd1 is the most audacious scam we've ever seen. It looks like a high-tech marketing business ..."
+          },
+          {
+            "title": "APK Download for Android | Aptoide - Crowd1",
+            "url": "https://crowd1.en.aptoide.com/app",
+            "content": "Description of Crowd1. Crowd1 is a business-oriented application designed to facilitate the growth and management of users' entrepreneurial endeavors. This app, ..."
+          },
+          {
+            "title": "Is Crowd1 running a pyramid scheme? - BBC",
+            "url": "https://www.bbc.com/news/av/world-africa-54753151",
+            "content": "2020 ж. 02 қар. ... Is Crowd1 running a pyramid scheme? Crowd1 presents itself as a high-tech crowd marketing business. It promises significant returns to its ..."
+          },
+          {
+            "title": "Juice | CROWD1 | Videos & Movies on Vimeo",
+            "url": "https://vimeo.com/805548303",
+            "content": "2023 ж. 07 нау. ... 6 months of CG work, heavy matte paintings, Michał Misiński directing, and all produced in-house from concept design, through animation, to color grading and ..."
+          },
+          {
+            "title": "In 2020, #BBCAfricaEye unmasked the men behind #Crowd1",
+            "url": "https://x.com/BBCAfrica/status/1557003667802292230",
+            "content": "2022 ж. 09 там. ... 2 years later, West Africa's factchecking project @DubawaNG reports Crowd1 is using fake accounts on Facebook to target Nigerians. BBC Africa ..."
+          },
+          {
+            "title": "FSCA warning on Crowd1 - Masthead",
+            "url": "https://www.masthead.co.za/newsletter/fsca-warning-on-crowd1/",
+            "content": "2020 ж. 21 шіл. ... Crowd1 is a suspected pyramid scheme that is offered on cellphone apps and has been referred by the FSCA to the Prudential Authority for ..."
+          },
+          {
+            "title": "Crowd1 - LinkedIn",
+            "url": "https://www.linkedin.com/company/crowd1-usa",
+            "content": "About us. Crowd1 is the next generation marketing network. We market websites, apps, and digital products through the usage of crowd marketing. Website: https ..."
+          },
+          {
+            "title": "Crowd1 crowd1.com - C1",
+            "url": "https://crowd1.com/signup/egrosle",
+            "content": ""
+          },
+          {
+            "title": "Crowd1 - Investor warnings - Autorité des marchés financiers",
+            "url": "https://lautorite.qc.ca/en/general-public/media-centre/investor-warnings/investor-warnings-sheet/crowd1",
+            "content": "2025 ж. 14 нау. ... Crowd1 ... Crowd1 is not registered with the Autorité des marchés financiers (AMF) and is not authorized to solicit investors in Québec. Website:."
+          },
+          {
+            "title": "Johan Staël von Holstein - Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Johan_Sta%C3%ABl_von_Holstein",
+            "content": "He was the CEO of the multi-level marketing company Crowd1, which has been identified as an illegal pyramid scheme by financial regulators internationally."
+          },
+          {
+            "title": "Crowd1 - Canadian Securities Administrators",
+            "url": "https://www.securities-administrators.ca/investor-alerts/crowd1/",
+            "content": "2025 ж. 14 нау. ... Investor Alerts. Here, you can consult CSA member investor alerts. The list is intended to assist the public and the securities industry in ..."
+          },
+          {
+            "title": "Log in | Login - C1",
+            "url": "https://crowd1.com/crowd1shop#!/crowd1+light-A5ea6d7c92225096b435255fd?productType=6&sellable=30g4g1A39bs03LrZQO14-6-7&appearance=1292",
+            "content": "Log In. Don't have an account yet? Register here. Username. Password. Wait. Logging in... Forgot your password? Click here ..."
+          },
+          {
+            "title": "Log in | Login - C1",
+            "url": "https://c1.global/login",
+            "content": "Log In. Don't have an account yet? Register here. Username. Password. Login. Logging in... Forgot your password? Click here ..."
+          }
+        ]
+      },
+      "error": null,
+      "red_flags": [
+        "пирамид"
+      ]
+    },
+    {
+      "source": "duckduckgo_instant_answer",
+      "ok": false,
+      "data": null,
+      "error": "timeout",
+      "red_flags": []
+    },
+    {
+      "source": "regulator_blacklist_local",
+      "ok": true,
+      "data": {
+        "lists_checked": 2,
+        "matches": [
+          {
+            "regulator": "АФМ РК (Агентство по финансовому мониторингу Республики Казахстан) — организации с признаками финансовой пирамиды",
+            "name": "Crowd1",
+            "domains": [],
+            "note": "статус: судебное разбирательство"
+          }
+        ]
+      },
+      "error": null,
+      "red_flags": [
+        "пирамид"
+      ]
+    },
+    {
+      "source": "username_enumeration",
+      "ok": true,
+      "data": {
+        "github": {
+          "url": "https://github.com/Crowd1",
+          "exists": true,
+          "status": 200
+        },
+        "instagram": {
+          "url": "https://www.instagram.com/Crowd1/",
+          "exists": true,
+          "status": 200
+        },
+        "x_twitter": {
+          "url": "https://x.com/Crowd1",
+          "exists": true,
+          "status": 200
+        },
+        "tiktok": {
+          "url": "https://www.tiktok.com/@Crowd1",
+          "exists": true,
+          "status": 200
+        },
+        "telegram": {
+          "url": "https://t.me/Crowd1",
+          "exists": true,
+          "status": 200
+        },
+        "reddit": {
+          "url": "https://www.reddit.com/user/Crowd1",
+          "exists": true,
+          "status": 200
+        },
+        "youtube": {
+          "url": "https://www.youtube.com/@Crowd1",
+          "exists": false,
+          "status": 404
+        }
+      },
+      "error": null,
+      "red_flags": []
+    },
+    {
+      "source": "threat_actor_username_search",
+      "ok": true,
+      "data": {
+        "found": false,
+        "hit_count": 0,
+        "forums": [],
+        "low_confidence": false
+      },
+      "error": null,
+      "red_flags": []
+    },
+    {
+      "source": "onionclaw_darknet_search",
+      "ok": true,
+      "data": {
+        "enabled": false,
+        "note": "darknet search disabled — set ENABLE_DARKNET_SEARCH=1 and ONIONCLAW_PATH after reading the legal notice in README.md"
+      },
+      "error": null,
+      "red_flags": []
+    }
+  ],
+  "risk_score": 60,
+  "risk_flags": [
+    "пирамид"
+  ],
+  "summary": "# Отчёт OSINT: Crowd1\n\n**Объект:** Crowd1 — MLM-платформа/бренд («crowd marketing», приложение, соцсети под username Crowd1), активно продвигается через регистрационные ссылки (crowd1.com, c1.global).\n\n**Признаки финансовой пирамиды: подтверждаются, высокий уровень уверенности.**\n\nКлючевые факты:\n- **Регуляторы:** АФМ РК официально включило Crowd1 в список организаций с признаками финансовой пирамиды (статус — судебное разбирательство). Аналогичные предупреждения от FSCA (ЮАР), AMF Québec, Canadian Securities Administrators.\n- **Журналистские расследования:** BBC Africa Eye (2020) — расследование \"Unmasking the Pyramid Kings\", называет Crowd1 \"самой дерзкой схемой\", таргетирующей Африку; Dubawa (2022) фиксирует использование фейковых аккаунтов для привлечения новых жертв.\n- **Wikipedia:** экс-CEO Johan Staël von Holstein — компания официально идентифицирована как нелегальная пирамида несколькими финансовыми регуляторами.\n- **Активное присутствие в соцсетях** (Instagram, TikTok, Telegram, X, GitHub) — типично для MLM-структур, активно вербующих участников.\n\nОпровергающих фактов не найдено. Данные threat-actor и darknet поиска не дали релевантной информации (darknet-поиск отключён — ограничение источника).\n\n**Вывод:** Rule-based score 60/100 занижен относительно фактической доказательной базы (множественные регуляторные предупреждения + журналистские расследования). Рекомендуется повысить",
+  "recurrence": [
+    {
+      "id": 514,
+      "query": "Qnet",
+      "query_type": "username",
+      "risk_score": 70,
+      "created_at": "2026-07-22 18:36:48"
+    },
+    {
+      "id": 511,
+      "query": "Finiko",
+      "query_type": "username",
+      "risk_score": 60,
+      "created_at": "2026-07-22 18:36:27"
+    },
+    {
+      "id": 472,
+      "query": "Crowd1",
+      "query_type": "name_or_org",
+      "risk_score": 60,
+      "created_at": "2026-07-22 18:34:35"
+    },
+    {
+      "id": 24,
+      "query": "cryptoking",
+      "query_type": "username",
+      "risk_score": 0,
+      "created_at": "2026-07-21 17:14:15"
+    },
+    {
+      "id": 23,
+      "query": "Qnet",
+      "query_type": "username",
+      "risk_score": 70,
+      "created_at": "2026-07-21 17:00:53"
+    },
+    {
+      "id": 22,
+      "query": "Finiko",
+      "query_type": "username",
+      "risk_score": 60,
+      "created_at": "2026-07-21 17:00:28"
+    },
+    {
+      "id": 20,
+      "query": "Finiko",
+      "query_type": "username",
+      "risk_score": 0,
+      "created_at": "2026-07-21 16:59:24"
+    },
+    {
+      "id": 14,
+      "query": "test",
+      "query_type": "username",
+      "risk_score": 0,
+      "created_at": "2026-07-21 16:34:44"
+    }
+  ]
+}

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Test Results - LuminaPortal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: { "primary": "#4848e5", "background-light": "#f6f6f8", "background-dark": "#111121" },
+        fontFamily: { "display": ["Inter", "sans-serif"] },
+        borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+      },
+    },
+  }
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  @keyframes countUp { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+  .score-anim { animation: countUp 0.5s ease forwards; }
+  @keyframes barFill { from { width: 0%; } to { width: var(--target-width); } }
+  .bar-fill { animation: barFill 1s ease 0.3s both; }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+
+<!-- Header -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 py-3">
+    <a href="index.html" class="flex items-center gap-2 text-primary">
+      <span class="material-symbols-outlined text-3xl font-bold">auto_stories</span>
+      <h2 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">LuminaPortal</h2>
+    </a>
+    <div class="flex items-center gap-3">
+      <button id="themeToggle" class="flex h-9 w-9 items-center justify-center rounded-full text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+        <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
+      </button>
+      <nav class="hidden md:flex items-center gap-6">
+        <a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="index.html">Dashboard</a>
+        <a class="text-sm font-semibold text-primary" href="results.html">Results</a>
+        <a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="admin.html">Admin</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8 py-10">
+
+  <!-- No results state -->
+  <div id="noResults" class="hidden text-center py-20">
+    <span class="material-symbols-outlined text-6xl text-slate-300 dark:text-slate-700 mb-4 block">assignment_late</span>
+    <h2 class="text-2xl font-bold text-slate-600 dark:text-slate-400 mb-2">No Results Found</h2>
+    <p class="text-slate-500 dark:text-slate-500 mb-8">Complete a test to see your results here.</p>
+    <a href="index.html" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primary/90 transition-colors">
+      <span class="material-symbols-outlined">arrow_back</span> Back to Dashboard
+    </a>
+  </div>
+
+  <!-- Results content -->
+  <div id="resultsContent">
+
+    <!-- Locked warning -->
+    <div id="lockedWarning" class="hidden mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl flex items-center gap-3">
+      <span class="material-symbols-outlined text-red-500 text-2xl">warning</span>
+      <div>
+        <p class="font-bold text-red-700 dark:text-red-400">Test was terminated due to rule violation</p>
+        <p class="text-sm text-red-600 dark:text-red-500">Score is based on answers submitted before the violation was detected.</p>
+      </div>
+    </div>
+
+    <!-- Hero Score Card -->
+    <div id="scoreCard" class="rounded-2xl overflow-hidden shadow-xl mb-8">
+      <div id="scoreCardBg" class="p-10 text-center text-white relative overflow-hidden">
+        <div class="absolute -top-10 -left-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+        <div class="relative z-10">
+          <p id="testNameTitle" class="text-white/80 font-medium text-lg mb-2"></p>
+          <div class="score-anim">
+            <div id="gradeBadge" class="inline-block w-24 h-24 rounded-full bg-white/20 border-4 border-white/40 flex items-center justify-center text-5xl font-black mb-4 mx-auto"></div>
+          </div>
+          <p id="scoreDisplay" class="text-7xl font-black mb-2 score-anim"></p>
+          <p id="passingStatus" class="text-xl font-bold text-white/90"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm text-center">
+        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Correct</p>
+        <p id="correctStat" class="text-2xl font-bold text-emerald-500"></p>
+      </div>
+      <div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm text-center">
+        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Incorrect</p>
+        <p id="incorrectStat" class="text-2xl font-bold text-red-500"></p>
+      </div>
+      <div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm text-center">
+        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Unanswered</p>
+        <p id="unansweredStat" class="text-2xl font-bold text-slate-400"></p>
+      </div>
+      <div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm text-center">
+        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Time Taken</p>
+        <p id="timeStat" class="text-2xl font-bold"></p>
+      </div>
+    </div>
+
+    <!-- Score bar -->
+    <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm mb-8">
+      <div class="flex justify-between mb-3">
+        <span class="font-bold text-slate-700 dark:text-slate-300">Your Score</span>
+        <span id="scoreBarLabel" class="font-bold text-primary"></span>
+      </div>
+      <div class="relative h-4 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+        <div id="scoreBar" class="h-full rounded-full bar-fill" style="--target-width:0%"></div>
+        <div id="passingLine" class="absolute top-0 bottom-0 w-0.5 bg-amber-400" title="Passing score"></div>
+      </div>
+      <div class="flex justify-between mt-2 text-xs text-slate-400">
+        <span>0%</span>
+        <span id="passingLineLabelPos" class="text-amber-500 font-bold"></span>
+        <span>100%</span>
+      </div>
+    </div>
+
+    <!-- Question breakdown -->
+    <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden mb-8">
+      <div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-lg">Question Breakdown</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400">Review each question with correct answers.</p>
+        </div>
+        <button id="toggleBreakdown" onclick="document.getElementById('breakdownList').classList.toggle('hidden'); this.querySelector('span').textContent = document.getElementById('breakdownList').classList.contains('hidden') ? 'expand_more' : 'expand_less'"
+          class="flex items-center gap-1 text-primary text-sm font-semibold hover:underline">
+          Show All <span class="material-symbols-outlined text-sm">expand_more</span>
+        </button>
+      </div>
+      <div id="breakdownList" class="hidden divide-y divide-slate-100 dark:divide-slate-800"></div>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="index.html" class="flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+        <span class="material-symbols-outlined">home</span> Back to Dashboard
+      </a>
+      <button id="retakeBtn" class="flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-primary text-white font-bold hover:bg-primary/90 transition-colors">
+        <span class="material-symbols-outlined">refresh</span> Retake Test
+      </button>
+      <button onclick="window.print()" class="flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl border border-slate-200 dark:border-slate-700 font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+        <span class="material-symbols-outlined">print</span> Print Results
+      </button>
+    </div>
+
+  </div><!-- end resultsContent -->
+</main>
+
+<script>
+// Theme
+function applyTheme() {
+  const stored = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const isDark = stored === 'dark' || (!stored && prefersDark);
+  document.documentElement.classList.toggle('dark', isDark);
+  document.getElementById('themeIcon').textContent = isDark ? 'light_mode' : 'dark_mode';
+}
+applyTheme();
+document.getElementById('themeToggle').addEventListener('click', () => {
+  const isDark = document.documentElement.classList.toggle('dark');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  document.getElementById('themeIcon').textContent = isDark ? 'light_mode' : 'dark_mode';
+});
+
+// Check for demo mode (from completed history card on dashboard)
+const urlParams = new URLSearchParams(window.location.search);
+const isDemo = urlParams.get('demo');
+
+let results = JSON.parse(sessionStorage.getItem('testResults') || 'null');
+
+// Demo data for World History (shown from dashboard)
+if (!results && isDemo === 'history') {
+  results = {
+    testId: 'history', testName: 'World History', score: 90,
+    correctCount: 9, totalQuestions: 10,
+    answers: [2, 1, 1, 2, 2, 1, 2, 2, 1, 3],
+    questions: [
+      { text: "In what year did World War II end?", options: ["1943","1944","1945","1946"], correct: 2 },
+      { text: "Who was the first president of the United States?", options: ["Thomas Jefferson","George Washington","John Adams","Benjamin Franklin"], correct: 1 },
+      { text: "The French Revolution began in which year?", options: ["1776","1789","1804","1815"], correct: 1 },
+      { text: "In which year did the Berlin Wall fall?", options: ["1987","1988","1989","1991"], correct: 2 },
+      { text: "Who co-wrote 'The Communist Manifesto'?", options: ["Lenin and Stalin","Rousseau and Voltaire","Marx and Engels","Trotsky and Mao"], correct: 2 },
+      { text: "What ancient wonder was located in Alexandria?", options: ["The Colossus","The Lighthouse","The Hanging Gardens","The Mausoleum"], correct: 1 },
+      { text: "The Renaissance originated in which country?", options: ["France","Germany","Italy","Spain"], correct: 2 },
+      { text: "Who led India's independence movement?", options: ["Jawaharlal Nehru","Subhas Chandra Bose","Mahatma Gandhi","Muhammad Ali Jinnah"], correct: 2 },
+      { text: "The United Nations was founded in which year?", options: ["1943","1945","1947","1950"], correct: 1 },
+      { text: "Which empire was known as 'the empire on which the sun never sets'?", options: ["Roman Empire","Ottoman Empire","Spanish Empire","British Empire"], correct: 3 }
+    ],
+    timeTaken: 845, locked: false, passing: 65, isPractice: false
+  };
+}
+
+if (!results) {
+  document.getElementById('noResults').classList.remove('hidden');
+  document.getElementById('resultsContent').classList.add('hidden');
+} else {
+  const { testId, testName, score, correctCount, totalQuestions, answers, questions, timeTaken, locked, passing, isPractice, timedOut } = results;
+
+  // Show locked warning
+  if (locked) document.getElementById('lockedWarning').classList.remove('hidden');
+
+  // Grade
+  function getGrade(s) {
+    if (s >= 90) return 'A';
+    if (s >= 80) return 'B';
+    if (s >= 70) return 'C';
+    if (s >= 60) return 'D';
+    return 'F';
+  }
+  const grade = getGrade(score);
+  const passed = score >= (passing || 70);
+
+  // Score card color
+  const gradeColors = { A: 'bg-emerald-500', B: 'bg-blue-500', C: 'bg-amber-500', D: 'bg-orange-500', F: 'bg-red-600' };
+  document.getElementById('scoreCardBg').className = 'p-10 text-center text-white relative overflow-hidden ' + (gradeColors[grade] || 'bg-primary');
+  document.getElementById('gradeBadge').textContent = grade;
+  document.getElementById('testNameTitle').textContent = testName + (isPractice ? ' (Practice)' : '');
+  document.getElementById('scoreDisplay').textContent = score + '%';
+  document.getElementById('passingStatus').textContent = isPractice ? 'Practice Complete!' : (passed ? '✓ Passed' : '✗ Not Passed');
+
+  // Stats
+  const incorrect = answers.filter((a, i) => a !== null && a !== questions[i].correct).length;
+  const unanswered = answers.filter(a => a === null).length;
+  document.getElementById('correctStat').textContent = correctCount;
+  document.getElementById('incorrectStat').textContent = incorrect;
+  document.getElementById('unansweredStat').textContent = unanswered;
+
+  // Time
+  const mins = Math.floor(timeTaken / 60);
+  const secs = timeTaken % 60;
+  document.getElementById('timeStat').textContent = mins + 'm ' + secs + 's';
+
+  // Score bar
+  const scoreBarEl = document.getElementById('scoreBar');
+  scoreBarEl.style.setProperty('--target-width', score + '%');
+  scoreBarEl.className = 'h-full rounded-full bar-fill ' + (passed ? 'bg-emerald-500' : 'bg-red-500');
+  document.getElementById('scoreBarLabel').textContent = score + '%';
+
+  // Passing line
+  const passingScore = passing || 70;
+  document.getElementById('passingLine').style.left = passingScore + '%';
+  document.getElementById('passingLineLabelPos').textContent = 'Pass: ' + passingScore + '%';
+
+  // Question breakdown
+  const breakdownList = document.getElementById('breakdownList');
+  questions.forEach((q, i) => {
+    const userAnswer = answers[i];
+    const isCorrect = userAnswer === q.correct;
+    const isSkipped = userAnswer === null;
+    const optionLetters = ['A', 'B', 'C', 'D'];
+
+    const item = document.createElement('div');
+    item.className = 'p-5';
+    item.innerHTML = `
+      <div class="flex items-start gap-3">
+        <div class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+          isSkipped ? 'bg-slate-100 dark:bg-slate-800 text-slate-500' :
+          isCorrect ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600' :
+          'bg-red-100 dark:bg-red-900/30 text-red-500'
+        }">
+          ${isSkipped ? '—' : isCorrect
+            ? '<span class="material-symbols-outlined text-sm" style="font-variation-settings:\'FILL\' 1,\'wght\' 400,\'GRAD\' 0,\'opsz\' 24">check</span>'
+            : '<span class="material-symbols-outlined text-sm" style="font-variation-settings:\'FILL\' 1,\'wght\' 400,\'GRAD\' 0,\'opsz\' 24">close</span>'}
+        </div>
+        <div class="flex-1">
+          <p class="font-semibold text-slate-900 dark:text-slate-100 mb-2">${i + 1}. ${q.text}</p>
+          ${!isCorrect ? `
+            <div class="flex items-center gap-2 text-sm mb-1">
+              <span class="text-slate-400">Your answer:</span>
+              <span class="font-medium ${isSkipped ? 'text-slate-400 italic' : 'text-red-500'}">
+                ${isSkipped ? 'Not answered' : optionLetters[userAnswer] + '. ' + q.options[userAnswer]}
+              </span>
+            </div>
+          ` : ''}
+          <div class="flex items-center gap-2 text-sm">
+            <span class="text-slate-400">Correct:</span>
+            <span class="font-medium text-emerald-600 dark:text-emerald-400">${optionLetters[q.correct]}. ${q.options[q.correct]}</span>
+          </div>
+        </div>
+      </div>
+    `;
+    breakdownList.appendChild(item);
+  });
+
+  // Retake button
+  document.getElementById('retakeBtn').addEventListener('click', () => {
+    sessionStorage.removeItem('testResults');
+    window.location.href = 'start.html?id=' + testId + '&name=' + encodeURIComponent(testName) + '&duration=' + (results.duration || test && test.duration || 30) + '&questions=' + totalQuestions + '&passing=' + passingScore;
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Student Dashboard - Available Tests</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4848e5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex min-h-screen w-full flex-col">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 py-3">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-3xl font-bold">auto_stories</span>
+<h2 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">LuminaPortal</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-semibold text-primary" href="#">Available Tests</a>
+<a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors" href="#">Results</a>
+<a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors" href="#">Study Material</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="h-9 w-64 rounded-lg border-none bg-slate-100 dark:bg-slate-800 pl-9 text-sm focus:ring-2 focus:ring-primary/50" placeholder="Search assessments..." type="text"/>
+</div>
+<button class="flex h-9 w-9 items-center justify-center rounded-full text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-9 w-9 rounded-full bg-primary/10 border border-primary/20 overflow-hidden">
+<img alt="Profile" class="h-full w-full object-cover" data-alt="Student profile avatar portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ3CyBYXBgbk9bP7o4eO4-WEearspu0nTRPyYLaAhGSrzv0hrw-3gnQbxOksx2KagLZVVoHKhZ5Fv-Z4MFwFECno9DJZnm4nbI6Mxq6x_A5Qeyooa4FcTioZi5Dez3pfWd9EM68nwgdBYpI3VKl9l763qupm7lhp0Wo6a0RQHyq_dt9SdT55QxmyawdcV8NlMXNVBAY4LK03jYXUocbtorRMYrK-rW4EKHsUEHhFpSgqHaE2r_vWtb4DmvqazdhMthWr1lenXaukFO"/>
+</div>
+</div>
+</div>
+</header>
+<main class="mx-auto w-full max-w-7xl flex-1 px-4 sm:px-6 lg:px-8 py-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div>
+<h1 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">Available Tests</h1>
+<p class="mt-2 text-base text-slate-500 dark:text-slate-400">Manage your upcoming assessments and track your academic progress.</p>
+</div>
+<div class="flex items-center gap-2 p-1 bg-slate-100 dark:bg-slate-800 rounded-lg self-start md:self-auto">
+<button class="px-4 py-1.5 text-sm font-medium bg-white dark:bg-slate-700 rounded-md shadow-sm text-slate-900 dark:text-white">Active</button>
+<button class="px-4 py-1.5 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">Completed</button>
+<button class="px-4 py-1.5 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">Missed</button>
+</div>
+</div>
+<!-- Dashboard Stats Summary -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Tests</p>
+<p class="text-2xl font-bold mt-1">12</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Pending</p>
+<p class="text-2xl font-bold mt-1 text-primary">04</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Avg. Score</p>
+<p class="text-2xl font-bold mt-1">88%</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Time Spent</p>
+<p class="text-2xl font-bold mt-1">14.5h</p>
+</div>
+</div>
+<!-- Tests Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Test Card 1 -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-primary/30 transition-all overflow-hidden flex flex-col">
+<div class="h-40 w-full bg-slate-100 dark:bg-slate-800 overflow-hidden relative">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent"></div>
+<img class="w-full h-full object-cover mix-blend-overlay group-hover:scale-105 transition-transform duration-500" data-alt="Abstract mathematical geometry and formulas background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmmlGXlAQN7PPtdSkKxSdHDPyBy5A8dGkj502nMxCxr0UiU2jtH6yMVzfyjtFmWteJ6_TGQpqVW0KH9RAOKqYBI0jZgI-EwDMeILOdIfjVXC71BUb_r8_8mFN4lBHFFpvzU27vo9BraMpLFWY-CY_y560-LDQJthS7qXldNVmW1xs8e5lq6rpNHIedSGHENARMnN6cfHtIpdi4GNk9iEjkXklCDdtzTtOTnJaFb0TlU0unW5DIWk0wJQM87o5jqyOGss58OyzxhXrV"/>
+<div class="absolute top-3 right-3">
+<span class="px-2 py-1 bg-white/90 dark:bg-slate-900/90 rounded text-[10px] font-bold uppercase text-primary">Math</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Advanced Mathematics</h3>
+<div class="space-y-3 mb-6">
+<div class="flex items-center text-slate-600 dark:text-slate-400 text-sm">
+<span class="material-symbols-outlined text-sm mr-2 text-slate-400">schedule</span>
+<span>Duration: 30 mins</span>
+</div>
+<div class="flex items-center text-slate-600 dark:text-slate-400 text-sm">
+<span class="material-symbols-outlined text-sm mr-2 text-slate-400">help</span>
+<span>20 Questions</span>
+</div>
+<div class="flex items-center text-red-500 dark:text-red-400 text-sm font-medium">
+<span class="material-symbols-outlined text-sm mr-2">event</span>
+<span>Deadline: Oct 25</span>
+</div>
+</div>
+<button class="mt-auto w-full bg-primary hover:bg-primary/90 text-white font-semibold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2">
+                            Start Test
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Test Card 2 -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-primary/30 transition-all overflow-hidden flex flex-col">
+<div class="h-40 w-full bg-slate-100 dark:bg-slate-800 overflow-hidden relative">
+<div class="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-transparent"></div>
+<img class="w-full h-full object-cover mix-blend-overlay group-hover:scale-105 transition-transform duration-500" data-alt="Laboratory glassware and molecular chemistry models" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPbjqMit8NEiPp7JG9QHuKghuaX0WYXpZ6EspPpBdryn8X61Ukh9n5vLDDMgBLbj0tEw2dDtR8OtxbMmzjAMWIYPI8IJ2uQVdeKQbycZZqoF7sumSvt4MSNG8_Y5dxb2ayZDizCJiLhpcNGqihBn4Y1eQNMMFr6kEn1vxeW34RZRafFFAvM7gVLyLYsNN6e70FYX7dEzzhKxp4f1ou6f4Geg42altQQbuDcvm4ss67wjC7OO_WxnBduk_s6_KcXfzqB57bUEd6wUwn"/>
+<div class="absolute top-3 right-3">
+<span class="px-2 py-1 bg-white/90 dark:bg-slate-900/90 rounded text-[10px] font-bold uppercase text-emerald-600">Science</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Organic Chemistry</h3>
+<div class="space-y-3 mb-6">
+<div class="flex items-center text-slate-600 dark:text-slate-400 text-sm">
+<span class="material-symbols-outlined text-sm mr-2 text-slate-400">schedule</span>
+<span>Duration: 45 mins</span>
+</div>
+<div class="flex items-center text-slate-600 dark:text-slate-400 text-sm">
+<span class="material-symbols-outlined text-sm mr-2 text-slate-400">help</span>
+<span>30 Questions</span>
+</div>
+<div class="flex items-center text-slate-600 dark:text-slate-400 text-sm">
+<span class="material-symbols-outlined text-sm mr-2 text-slate-400">event</span>
+<span>Deadline: Oct 28</span>
+</div>
+</div>
+<button class="mt-auto w-full bg-primary hover:bg-primary/90 text-white font-semibold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2">
+                            Start Test
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Test Card 3 -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-primary/30 transition-all overflow-hidden flex flex-col">
+<div class="h-40 w-full bg-slate-100 dark:bg-slate-800 overflow-hidden relative">
+<div class="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-transparent"></div>
+<img class="w-full h-full object-cover mix-blend-overlay group-hover:scale-105 transition-transform duration-500" data-alt="Vintage map and historical globe background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTRj82NO3fQvSs3zvfOJ_cBgnLAUDq8AbnUWrhhraakBAr0bjg5EH6pGDISgtMThgrLBx80x6eXFryGQ4zJydwcHhgpT194llt2tAQ8Vh4NYw5-T3CWvxEPeWnim0C6ROXCa202EkOFxlZH5vJ8jiPjrRmIbztoXl6-0Qd8WUiqwModPz--cnGaLuaagtT0mxQG3kqvIyhUKvp8jeaLQKH-sa2ShDxJ6evffpgF-VlPFE0LNFJwkovART99QENp8g_WhWIklIuLYwE"/>
+<div class="absolute top-3 right-3">
+<span class="px-2 py-1 bg-white/90 dark:bg-slate-900/90 rounded text-[10px] font-bold uppercase text-amber-600">History</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">World History</h3>
+<div class="space-y-3 mb-6">
+<div class="flex items-center text-slate-600 dark:text-slate-400 text-sm">
+<span class="material-symbols-outlined text-sm mr-2 text-slate-400">schedule</span>
+<span>Duration: 20 mins</span>
+</div>
+<div class="flex items-center text-slate-600 dark:text-slate-400 text-sm">
+<span class="material-symbols-outlined text-sm mr-2 text-slate-400">help</span>
+<span>15 Questions</span>
+</div>
+<div class="flex items-center text-slate-600 dark:text-slate-400 text-sm">
+<span class="material-symbols-outlined text-sm mr-2 text-slate-400">event</span>
+<span>Deadline: Oct 30</span>
+</div>
+</div>
+<button class="mt-auto w-full bg-primary hover:bg-primary/90 text-white font-semibold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2">
+                            Start Test
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Test Card 4 -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-primary/30 transition-all overflow-hidden flex flex-col">
+<div class="h-40 w-full bg-slate-100 dark:bg-slate-800 overflow-hidden relative">
+<div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-transparent"></div>
+<img class="w-full h-full object-cover mix-blend-overlay group-hover:scale-105 transition-transform duration-500" data-alt="Financial charts and stock market indicators" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDveU4H9CVa-2c8y-ZXXH_PCdoAMp5uA32k0-HBNOVuk7LrWZciYnYJKNq786kah6QgpRap_d6b2-adkf9vL0dyOjJmvLyG_M7_DGVe6luHjUp0IutIoPb7o0gdLuNGTqO17RG4PEJWQRh8ByoCnT6hk4L9qgs4x1VZV_t-zlrz908urTZhs5_YTcL4lSq50-9Vloh2K4ARafNIEbZJ8hNItFYqDPblbIdPuJVUyVxT7WLVFaSDvJlB2hiRtFOR-NBG9g51pxPWRzhb"/>
+<div class="absolute top-3 right-3">
+<span class="px-2 py-1 bg-white/90 dark:bg-slate-900/90 rounded text-[10px] font-bold uppercase text-blue-600">Economics</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Macroeconomics</h3>
+<div class="space-y-3 mb-6">
+<div class="flex items-center text-slate-600 dark:text-slate-400 text-sm">
+<span class="material-symbols-outlined text-sm mr-2 text-slate-400">schedule</span>
+<span>Duration: 40 mins</span>
+</div>
+<div class="flex items-center text-slate-600 dark:text-slate-400 text-sm">
+<span class="material-symbols-outlined text-sm mr-2 text-slate-400">help</span>
+<span>25 Questions</span>
+</div>
+<div class="flex items-center text-slate-600 dark:text-slate-400 text-sm">
+<span class="material-symbols-outlined text-sm mr-2 text-slate-400">event</span>
+<span>Deadline: Nov 02</span>
+</div>
+</div>
+<button class="mt-auto w-full bg-primary hover:bg-primary/90 text-white font-semibold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2">
+                            Start Test
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Test Card 5 (Locked/Upcoming) -->
+<div class="group bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-dashed border-slate-300 dark:border-slate-700 overflow-hidden flex flex-col opacity-75">
+<div class="h-40 w-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center relative">
+<span class="material-symbols-outlined text-slate-400 text-5xl">lock</span>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<h3 class="text-lg font-bold text-slate-500 dark:text-slate-500 mb-4">Physics: Relativity</h3>
+<div class="space-y-3 mb-6">
+<div class="flex items-center text-slate-400 dark:text-slate-500 text-sm">
+<span class="material-symbols-outlined text-sm mr-2">schedule</span>
+<span>Unlocks in 3 days</span>
+</div>
+<div class="flex items-center text-slate-400 dark:text-slate-500 text-sm">
+<span class="material-symbols-outlined text-sm mr-2">help</span>
+<span>40 Questions</span>
+</div>
+</div>
+<button class="mt-auto w-full bg-slate-200 dark:bg-slate-700 text-slate-500 font-semibold py-2.5 rounded-lg cursor-not-allowed" disabled="">
+                            Locked
+                        </button>
+</div>
+</div>
+<!-- Call to action/Help card -->
+<div class="group bg-primary rounded-xl p-6 shadow-sm flex flex-col items-center justify-center text-center text-white relative overflow-hidden">
+<div class="absolute -bottom-6 -right-6 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+<div class="absolute -top-6 -left-6 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+<span class="material-symbols-outlined text-5xl mb-4">quiz</span>
+<h3 class="text-xl font-bold mb-2">Practice Mode</h3>
+<p class="text-sm text-primary-100/80 mb-6 px-4">Take non-graded practice tests to sharpen your skills before the real exam.</p>
+<button class="bg-white text-primary px-6 py-2 rounded-lg font-bold text-sm hover:bg-slate-100 transition-colors">
+                        Browse Practice
+                    </button>
+</div>
+</div>
+</main>
+<footer class="border-t border-slate-200 dark:border-slate-800 py-8 mt-12 bg-white dark:bg-background-dark">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex items-center gap-2 text-slate-500">
+<span class="material-symbols-outlined text-xl">auto_stories</span>
+<span class="text-sm font-medium">© 2024 LuminaPortal Student Management</span>
+</div>
+<div class="flex items-center gap-6">
+<a class="text-sm text-slate-500 hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-sm text-slate-500 hover:text-primary transition-colors" href="#">Support Center</a>
+<a class="text-sm text-slate-500 hover:text-primary transition-colors" href="#">Academic Rules</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

@@ -1,0 +1,282 @@
+{
+  "cached_at": "2026-07-22T18:36:48.081341+00:00",
+  "investigation_id": 514,
+  "query": "Qnet",
+  "detected_type": "username",
+  "connectors_run": [
+    "searx_metasearch",
+    "duckduckgo_instant_answer",
+    "regulator_blacklist_local",
+    "username_enumeration",
+    "threat_actor_username_search",
+    "onionclaw_darknet_search"
+  ],
+  "results": [
+    {
+      "source": "searx_metasearch",
+      "ok": true,
+      "data": {
+        "engine_count": null,
+        "results": [
+          {
+            "title": "QNET: Wellness & Lifestyle Direct Selling Company",
+            "url": "https://www.qnet.net/",
+            "content": "We're QNET, a global lifestyle and wellness brand. We provide unique products through direct sales to enhance your health, well-being, and lifestyle."
+          },
+          {
+            "title": "QNET (@qnet_kazakhstan) • Instagram photos and videos",
+            "url": "https://www.instagram.com/qnet_kazakhstan/",
+            "content": "Фирменный знак династии мастеров, история которой уходит в 1871 год, гармонично переплетается с символом бесконечности. Такое сочетание превращает украшение в ..."
+          },
+          {
+            "title": "QNet Ltd - Login",
+            "url": "https://portal.qnet.net/VirtualOffice4/onlineestore/online_login_vo.aspx",
+            "content": "Having problems logging in? Click here. Want to shop as a Retail Customer? Shop now. Please be sure to turn off your pop-up blocker before logging in."
+          },
+          {
+            "title": "QNET | Hong Kong Hong Kong - Facebook",
+            "url": "https://www.facebook.com/QNETOfficial/",
+            "content": "QNET is a leading e-commerce based direct selling business, offering a wide range of health, wellness and lifestyle products to customers around the world. 󱞴 ..."
+          },
+          {
+            "title": "Приложения в Google Play – QNET Mobile WP",
+            "url": "https://play.google.com/store/apps/details?id=com.qnet.biz&hl=ru",
+            "content": "Погашайте эксклюзивные продукты QNET, используя баллы электронного ваучера. ... В настоящее время приложение доступно на 5 языках (английском, французском, ..."
+          },
+          {
+            "title": "QNET - прямые продажи в онлайне: отзывы, продукты ... - KP.RU",
+            "url": "https://www.kp.ru/putevoditel/spetsproekty/qnet-otzyvy/",
+            "content": "Международная компания прямых продаж QNET в этом вопросе преуспела давно. QNET является пионером электронной коммерции. В те годы, когда в других компаниях ..."
+          },
+          {
+            "title": "Иллюзия богатства: как Qnet втягивает людей в финансовую ...",
+            "url": "https://www.inform.kz/ru/illyuziya-bogatstva-kak-qnet-vtyagivaet-lyudey-v-finansovuyu-piramidu-be6da2",
+            "content": "2025 ж. 09 там. ... Одной из тех, кто попалась на обещания «золотых гор», стала жительница города Эльмира Жанашева. Она утверждает, что в процессе вовлечения ..."
+          },
+          {
+            "title": "QNET (Official) - YouTube",
+            "url": "https://www.youtube.com/user/QNETofficial",
+            "content": "QNET's Personal Care & Beauty · QNET's personal care and beauty products are here to help you stay fresh, glowing, and confident every day. · QNET Revolutionary ..."
+          },
+          {
+            "title": "QNet - QuantERA",
+            "url": "https://quantera.eu/qnet/",
+            "content": "QNet will assess the out-of-equilibrium dynamics of a quantum network with long-range interactions in the presence and as a function of noise and dissipation."
+          },
+          {
+            "title": "Qnet - Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Qnet",
+            "content": "The company operates legally in some countries, but has been charged as a Ponzi scheme and multi-level marketing in countries like India. ... The government of ..."
+          },
+          {
+            "title": "QNET - Википедия",
+            "url": "https://ru.wikipedia.org/wiki/QNET",
+            "content": "Является основным предприятием группы компаний QI Group и занимается продажей различных товаров и услуг: средств личной гигиены, товаров для дома, биологически ..."
+          },
+          {
+            "title": "QNET Mobile WP - App Store - Apple",
+            "url": "https://apps.apple.com/us/app/qnet-mobile-wp/id1281854233",
+            "content": "The QNET Mobile App is every distributor's partner in their journey to success, bringing all the most important aspects of the business into one digital hub."
+          },
+          {
+            "title": "QNET - Уикипедия",
+            "url": "https://kk.wikipedia.org/wiki/QNET",
+            "content": "QNET ; 1998; · Виджей Эсваран · Гонконг · Малу Калуза (бас директор) · Тұтыну тауарлары,сағаттар, денсаулық өнімдері."
+          },
+          {
+            "title": "QNET Official (@qnetofficial) - Instagram",
+            "url": "https://www.instagram.com/qnetofficial/",
+            "content": "QNET is a global direct-selling company offering a robust portfolio of health, wellness, nutrition, & lifestyle products. · 20 years of innovation. 20 years of ..."
+          },
+          {
+            "title": "QNET: Wellness & Lifestyle Direct Selling Company",
+            "url": "https://www.qnet.co.th/",
+            "content": "QNET is a global lifestyle and wellness company that uses a direct selling business model. We empower individuals to achieve personal success through high ..."
+          }
+        ]
+      },
+      "error": null,
+      "red_flags": [
+        "ponzi"
+      ]
+    },
+    {
+      "source": "duckduckgo_instant_answer",
+      "ok": false,
+      "data": null,
+      "error": "timeout",
+      "red_flags": []
+    },
+    {
+      "source": "regulator_blacklist_local",
+      "ok": true,
+      "data": {
+        "lists_checked": 2,
+        "matches": [
+          {
+            "regulator": "АФМ РК (Агентство по финансовому мониторингу Республики Казахстан) — организации с признаками финансовой пирамиды",
+            "name": "Qnet",
+            "domains": [],
+            "note": "статус: приговор суда вынесен"
+          }
+        ]
+      },
+      "error": null,
+      "red_flags": [
+        "пирамид"
+      ]
+    },
+    {
+      "source": "username_enumeration",
+      "ok": true,
+      "data": {
+        "github": {
+          "url": "https://github.com/Qnet",
+          "exists": true,
+          "status": 200
+        },
+        "instagram": {
+          "url": "https://www.instagram.com/Qnet/",
+          "exists": true,
+          "status": 200
+        },
+        "x_twitter": {
+          "url": "https://x.com/Qnet",
+          "exists": true,
+          "status": 200
+        },
+        "tiktok": {
+          "url": "https://www.tiktok.com/@Qnet",
+          "exists": true,
+          "status": 200
+        },
+        "telegram": {
+          "url": "https://t.me/Qnet",
+          "exists": true,
+          "status": 200
+        },
+        "reddit": {
+          "url": "https://www.reddit.com/user/Qnet",
+          "exists": true,
+          "status": 200
+        },
+        "youtube": {
+          "url": "https://www.youtube.com/@Qnet",
+          "exists": true,
+          "status": 200
+        }
+      },
+      "error": null,
+      "red_flags": []
+    },
+    {
+      "source": "threat_actor_username_search",
+      "ok": true,
+      "data": {
+        "found": true,
+        "hit_count": 1,
+        "forums": [
+          "Cardingmafia"
+        ],
+        "low_confidence": true
+      },
+      "error": null,
+      "red_flags": []
+    },
+    {
+      "source": "onionclaw_darknet_search",
+      "ok": true,
+      "data": {
+        "enabled": false,
+        "note": "darknet search disabled — set ENABLE_DARKNET_SEARCH=1 and ONIONCLAW_PATH after reading the legal notice in README.md"
+      },
+      "error": null,
+      "red_flags": []
+    }
+  ],
+  "risk_score": 70,
+  "risk_flags": [
+    "ponzi",
+    "пирамид"
+  ],
+  "summary": "# OSINT-отчёт: Qnet\n\n**Объект:** QNET — международная компания сетевого маркетинга (MLM), основана в 1998 г. (QI Group, Гонконг), позиционируется как продавец товаров для здоровья, красоты и лайфстайла.\n\n## Признаки финансовой пирамиды — подтверждаются\n\n1. **Регулятор:** АФМ РК включил Qnet в список организаций с признаками финансовой пирамиды, **вынесен обвинительный приговор суда** — это самый весомый факт из всех источников.\n2. **Wikipedia (en/ru):** компания официально обвинялась в схеме Понци и запрещённом MLM в ряде стран, включая Индию.\n3. **СМИ (inform.kz):** статья о пострадавших в Казахстане, описывающая вовлечение людей через \"иллюзию богатства\".\n4. Red-flag ключевые слова (ponzi, пирамида) подтверждаются контекстом, а не случайны.\n\n## Что не подтверждает риск\n- Официальные каналы (сайт, соцсети, приложения) выглядят как легитимный корпоративный MLM-бизнес с презентабельным маркетингом — типично для пирамид, маскирующихся под легальный бизнес.\n- Упоминание на форуме Cardingmafia — низкая достоверность (low_confidence=True), возможен просто совпадение username, не доказательство.\n\n## Вывод\nRule-based score 70/100 подтверждается независимыми источниками: судебное решение регулятора Казахстана — сильный, проверяемый факт. Совокупность (приговор суда + признание Ponzi-схемой в Индии + жалобы пострадавших) указывает на **высокую вероятность мошеннической MLM/",
+  "recurrence": [
+    {
+      "id": 511,
+      "query": "Finiko",
+      "query_type": "username",
+      "risk_score": 60,
+      "created_at": "2026-07-22 18:36:27"
+    },
+    {
+      "id": 469,
+      "query": "Qnet",
+      "query_type": "name_or_org",
+      "risk_score": 60,
+      "created_at": "2026-07-22 18:34:31"
+    },
+    {
+      "id": 381,
+      "query": "Qnet",
+      "query_type": "name_or_org",
+      "risk_score": 70,
+      "created_at": "2026-07-22 17:28:42"
+    },
+    {
+      "id": 335,
+      "query": "Qnet",
+      "query_type": "name_or_org",
+      "risk_score": 70,
+      "created_at": "2026-07-22 16:10:30"
+    },
+    {
+      "id": 79,
+      "query": "Qnet",
+      "query_type": "name_or_org",
+      "risk_score": 70,
+      "created_at": "2026-07-21 18:03:26"
+    },
+    {
+      "id": 46,
+      "query": "QNet",
+      "query_type": "name_or_org",
+      "risk_score": 70,
+      "created_at": "2026-07-21 17:44:44"
+    },
+    {
+      "id": 24,
+      "query": "cryptoking",
+      "query_type": "username",
+      "risk_score": 0,
+      "created_at": "2026-07-21 17:14:15"
+    },
+    {
+      "id": 23,
+      "query": "Qnet",
+      "query_type": "username",
+      "risk_score": 70,
+      "created_at": "2026-07-21 17:00:53"
+    },
+    {
+      "id": 22,
+      "query": "Finiko",
+      "query_type": "username",
+      "risk_score": 60,
+      "created_at": "2026-07-21 17:00:28"
+    },
+    {
+      "id": 20,
+      "query": "Finiko",
+      "query_type": "username",
+      "risk_score": 0,
+      "created_at": "2026-07-21 16:59:24"
+    },
+    {
+      "id": 14,
+      "query": "test",
+      "query_type": "username",
+      "risk_score": 0,
+      "created_at": "2026-07-21 16:34:44"
+    }
+  ]
+}

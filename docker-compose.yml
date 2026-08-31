@@ -1,0 +1,33 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      # отключены по умолчанию — требуют vendor/OnionClaw и vendor/searxng,
+      # которые в образ не копируются; включай, если разворачиваешь их отдельно
+      ENABLE_DARKNET_SEARCH: "false"
+      ENABLE_LOCAL_SEARXNG: "false"
+      ENABLE_CERTSTREAM_WATCHER: "false"
+    volumes:
+      - saq-data:/srv/data
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    environment:
+      PHYLAX_API_URL: "http://backend:8000"
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+volumes:
+  saq-data:

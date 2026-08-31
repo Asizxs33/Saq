@@ -1,0 +1,46 @@
+.venv/
+vendor/tor-expert-bundle/tor-data/
+vendor/tor-expert-bundle/*.log
+vendor/certstream-server-go/certstream-server-go.exe
+vendor/certstream-server-go/*.log
+vendor/certstream-server-go/ct_index.json*
+vendor/searxng/.venv/
+vendor/searxng/*.log
+__pycache__/
+*.pyc
+.env
+data/phylax.sqlite3
+backend.log
+web-dev.log
+*.log
+data/opensanctions/
+
+# ── зависимости и сборки (не должны попадать в репозиторий) ──────────
+node_modules/
+*/node_modules/
+web/.next/
+web/out/
+web/.vercel/
+.vercel/
+guardian-electron/dist/
+guardian-electron/out/
+build/
+dist/
+
+# vendor/ — 20 ГБ сторонних бинарников (tor, searxng, certstream, playwright)
+# ставится отдельно, в репозитории ему не место
+vendor/
+
+# скриншоты и промо-материалы — генерируются локально
+promo/
+screenshots-debug/
+
+# локальные секреты и окружение
+.env.local
+.env.*.local
+web/.env.local
+
+# локальный admin-токен (JWT) — не публиковать
+.admin_token
+.tok
+*.token

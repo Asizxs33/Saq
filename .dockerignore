@@ -1,0 +1,8 @@
+.venv
+data
+web
+vendor
+*.sqlite3
+.env
+__pycache__
+*.pyc

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Test Interface - Advanced Physics Midterm</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4848e5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Header Section -->
+<header class="sticky top-0 z-10 w-full border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 md:px-10 py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary">menu_book</span>
+</div>
+<div>
+<h1 class="text-lg font-bold leading-tight tracking-tight text-slate-900 dark:text-slate-100">Advanced Physics Midterm</h1>
+<p class="text-xs font-medium text-slate-500 dark:text-slate-400">Section B: Quantum Mechanics</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<!-- Timer: Shown in red as per user request for < 5 mins -->
+<div class="flex items-center gap-2 px-4 py-2 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl">
+<span class="material-symbols-outlined text-red-600 dark:text-red-400 text-xl">timer</span>
+<span class="text-red-600 dark:text-red-400 font-bold text-lg tabular-nums">04:38</span>
+</div>
+<button class="hidden md:flex items-center justify-center rounded-xl h-11 px-6 bg-primary text-white text-sm font-bold transition-all hover:bg-primary/90">
+<span>Finish early</span>
+</button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col items-center w-full max-w-4xl mx-auto px-4 py-8">
+<!-- Question Content -->
+<div class="w-full bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+<div class="p-6 md:p-10">
+<div class="flex items-center gap-2 mb-6">
+<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full uppercase tracking-wider">Question 14</span>
+<span class="text-slate-400 text-sm">Multiple Choice</span>
+</div>
+<h2 class="text-2xl md:text-3xl font-bold leading-snug text-slate-900 dark:text-slate-100 mb-8">
+                    Which principle states that it is impossible to simultaneously know both the exact position and momentum of a particle?
+                </h2>
+<!-- Answer Options -->
+<div class="grid grid-cols-1 gap-4">
+<!-- Option A -->
+<label class="group relative flex items-center gap-4 rounded-xl border-2 border-slate-100 dark:border-slate-800 p-5 cursor-pointer hover:border-primary/50 transition-all bg-slate-50/50 dark:bg-slate-800/30 has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+<input class="h-6 w-6 border-2 border-slate-300 dark:border-slate-600 bg-transparent text-primary focus:ring-primary focus:ring-offset-0 checked:border-primary" name="answer" type="radio"/>
+<div class="flex flex-col">
+<span class="text-slate-900 dark:text-slate-100 font-semibold text-lg">Schrödinger's Cat Paradox</span>
+<span class="text-slate-500 dark:text-slate-400 text-sm">Option A</span>
+</div>
+<div class="ml-auto opacity-0 group-has-[:checked]:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+</div>
+</label>
+<!-- Option B (Selected) -->
+<label class="group relative flex items-center gap-4 rounded-xl border-2 border-primary p-5 cursor-pointer transition-all bg-primary/5 dark:bg-primary/10">
+<input checked="" class="h-6 w-6 border-2 border-primary bg-transparent text-primary focus:ring-primary focus:ring-offset-0" name="answer" type="radio"/>
+<div class="flex flex-col">
+<span class="text-slate-900 dark:text-slate-100 font-semibold text-lg">Heisenberg Uncertainty Principle</span>
+<span class="text-slate-500 dark:text-slate-400 text-sm">Option B</span>
+</div>
+<div class="ml-auto opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+</div>
+</label>
+<!-- Option C -->
+<label class="group relative flex items-center gap-4 rounded-xl border-2 border-slate-100 dark:border-slate-800 p-5 cursor-pointer hover:border-primary/50 transition-all bg-slate-50/50 dark:bg-slate-800/30 has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+<input class="h-6 w-6 border-2 border-slate-300 dark:border-slate-600 bg-transparent text-primary focus:ring-primary focus:ring-offset-0" name="answer" type="radio"/>
+<div class="flex flex-col">
+<span class="text-slate-900 dark:text-slate-100 font-semibold text-lg">Pauli Exclusion Principle</span>
+<span class="text-slate-500 dark:text-slate-400 text-sm">Option C</span>
+</div>
+<div class="ml-auto opacity-0 group-has-[:checked]:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+</div>
+</label>
+<!-- Option D -->
+<label class="group relative flex items-center gap-4 rounded-xl border-2 border-slate-100 dark:border-slate-800 p-5 cursor-pointer hover:border-primary/50 transition-all bg-slate-50/50 dark:bg-slate-800/30 has-[:checked]:border-primary has-[:checked]:bg-primary/5">
+<input class="h-6 w-6 border-2 border-slate-300 dark:border-slate-600 bg-transparent text-primary focus:ring-primary focus:ring-offset-0" name="answer" type="radio"/>
+<div class="flex flex-col">
+<span class="text-slate-900 dark:text-slate-100 font-semibold text-lg">Photoelectric Effect</span>
+<span class="text-slate-500 dark:text-slate-400 text-sm">Option D</span>
+</div>
+<div class="ml-auto opacity-0 group-has-[:checked]:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+</div>
+</label>
+</div>
+</div>
+</div>
+<!-- Optional: Mobile Finish Button -->
+<button class="md:hidden mt-6 w-full flex items-center justify-center rounded-xl h-12 bg-primary text-white text-base font-bold">
+<span>Finish early</span>
+</button>
+</main>
+<!-- Footer Progress Section -->
+<footer class="w-full bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 p-4 md:px-10">
+<div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-6">
+<!-- Progress Info -->
+<div class="flex flex-col w-full md:w-64 gap-2">
+<div class="flex justify-between items-end">
+<span class="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wide">Question 14 <span class="text-slate-400 font-medium">of 20</span></span>
+<span class="text-sm font-bold text-primary">70%</span>
+</div>
+<div class="w-full h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-500" style="width: 70%;"></div>
+</div>
+</div>
+<!-- Navigation Buttons -->
+<div class="flex items-center gap-3 w-full md:w-auto md:ml-auto">
+<button class="flex-1 md:flex-none flex items-center justify-center gap-2 rounded-xl h-12 px-8 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-xl">arrow_back</span>
+<span>Back</span>
+</button>
+<button class="flex-1 md:flex-none flex items-center justify-center gap-2 rounded-xl h-12 px-8 bg-primary text-white font-bold hover:bg-primary/90 transition-colors">
+<span>Next</span>
+<span class="material-symbols-outlined text-xl">arrow_forward</span>
+</button>
+</div>
+</div>
+</footer>
+</body></html>

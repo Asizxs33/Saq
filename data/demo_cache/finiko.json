@@ -1,0 +1,300 @@
+{
+  "cached_at": "2026-07-22T18:39:48.551585+00:00",
+  "investigation_id": 523,
+  "query": "Finiko",
+  "detected_type": "username",
+  "connectors_run": [
+    "searx_metasearch",
+    "duckduckgo_instant_answer",
+    "regulator_blacklist_local",
+    "username_enumeration",
+    "threat_actor_username_search",
+    "onionclaw_darknet_search"
+  ],
+  "results": [
+    {
+      "source": "searx_metasearch",
+      "ok": true,
+      "data": {
+        "engine_count": null,
+        "results": [
+          {
+            "title": "Finiko - Википедия",
+            "url": "https://ru.wikipedia.org/wiki/Finiko",
+            "content": "«Finiko» («Финико») — российская финансовая пирамида, по предварительным оценкам сумма инвестиций достигает 7 млрд рублей."
+          },
+          {
+            "title": "Finiko мирового масштаба - Коммерсантъ - Kommersant",
+            "url": "https://www.kommersant.ru/doc/4984627",
+            "content": "2021 ж. 10 қыр. ... Центральный аппарат МВД решил дальше сам расследовать дело финансовой пирамиды Finiko, которое прежде вели следователи в Казани. Там же были ..."
+          },
+          {
+            "title": "Задержаны шестеро руководителей и активных участников ...",
+            "url": "https://www.interfax.ru/russia/837249",
+            "content": "2022 ж. 21 сәу. ... 21 апреля. INTERFAX.RU - МВД задержало шестерых руководителей и участников финансовой пирамиды Finiko, подозреваемых в мошенничестве. \" ..."
+          },
+          {
+            "title": "Из Турции депортировали соосновательницу финансовой ... - РБК",
+            "url": "https://www.rbc.ru/rbcfreenews/69bd557c9a7947481d6f841c",
+            "content": "2026 ж. 20 нау. ... Предварительно установлено, что в период с 2019 по 2021 год женщина представляла интернет-проект Finiko, работавший по принципу финансовой ..."
+          },
+          {
+            "title": "Турция выдала России соосновательницу финансовой пирамиды",
+            "url": "https://www.forbes.ru/society/557664-turcia-vydala-rossii-soosnovatel-nicu-finansovoj-piramidy-finiko",
+            "content": "2026 ж. 20 нау. ... Турция выдала России соосновательницу финансовой пирамиды «Финико», из-за деятельности которой более 7700 человек лишились свыше 1 млрд ..."
+          },
+          {
+            "title": "FINIKO | Банк России",
+            "url": "https://cbr.ru/inside/warning-list/detail/?id=7239",
+            "content": "finiko.tb.ru. finiko-kazan.ru. finiko.monster. zk35.ru. finiko.link. thefiniko.com. finiko.space. finiko.ru. Дата внесения. 01.02.2021. Дата последнего ..."
+          },
+          {
+            "title": "Финико»: история системы автоматической генерации прибыли",
+            "url": "https://t-j.ru/finiko-truecrime/",
+            "content": "История компании Finiko Кирилла Доронина. Что обещала компания вкладчикам. Когда выяснилось, что это финансовая пирамида. Кто пострадал от деятельности ..."
+          },
+          {
+            "title": "Finiko - YouTube",
+            "url": "https://www.youtube.com/c/finiko",
+            "content": "Share your videos with friends, family, and the world."
+          },
+          {
+            "title": "Ущерб вкладчиков финансовой пирамиды Finiko превысил ...",
+            "url": "https://www.interfax.ru/russia/789604",
+            "content": "2021 ж. 10 қыр. ... 10 сентября. INTERFAX.RU - Сумма предварительного ущерба вкладчикам финансовой пирамиды Finiko превышает миллиард рублей. Уголовное дело о ..."
+          },
+          {
+            "title": "Финансовая пирамида во благо? Кто поможет вкладчикам Finiko",
+            "url": "https://www.dw.com/ru/finansovaja-piramida-vo-blago-kto-pomozhet-vkladchikam-finiko/a-58846523",
+            "content": "2021 ж. 13 там. ... Подробности - у DW. \"Взлететь еще выше\". Число заявлений в полицию на руководителей рухнувшей финансовой пирамиды Finiko, которая предлагала ..."
+          },
+          {
+            "title": "Ущерб от деятельности Finiko превысил миллиард рублей",
+            "url": "https://www.svoboda.org/a/31454058.html",
+            "content": "2021 ж. 10 қыр. ... Уголовное дело о деятельности финансовой пирамиды Finiko передано в центральный аппарат МВД России/"
+          },
+          {
+            "title": "В России рухнула финансовая пирамида Finiko. Люди вложили в ...",
+            "url": "https://meduza.io/feature/2021/07/26/v-rossii-ruhnula-finansovaya-piramida-finiko-lyudi-vlozhili-v-nee-milliony-esli-ne-milliardy-rubley-a-teper-nadeyutsya-vernut-ih-s-pomoschyu-kollektivnoy-meditatsii",
+            "content": "2021 ж. 26 шіл. ... Компания Finiko из Казани с 2019 года привлекала деньги россиян, обещая доходность 20–30% в месяц, но в июле 2021-го перестала выплачивать ..."
+          },
+          {
+            "title": "Суд Костаная приговорил главу филиала финпирамиды Finiko к ...",
+            "url": "https://vlast.kz/novosti/63438-sud-kostanaa-prigovoril-glavu-filiala-finpiramidy-finiko-k-semi-godam-lisenia-svobody.html",
+            "content": "2025 ж. 13 қаң. ... Суд №2 города Костаная рассмотрел уголовное дело в отношении руководителя структурным подразделением финансовой (инвестиционной) пирамиды ..."
+          },
+          {
+            "title": "Таразда «The Finiko» қаржы пирамидасы әшкереленді - YouTube",
+            "url": "https://www.youtube.com/watch?v=mhSKAM9x_6w",
+            "content": "2023 ж. 27 қыр. ... Тараз қаласының аумағында «The Finiko» қаржы пирамидасын құру фактісі әшкереленді. «Хабар 24» арнасына жазылыңыздар: http://bit.ly/31WnObW ..."
+          },
+          {
+            "title": "Власть, бизнес, Finiko: кто стоит за основателями финансовой ...",
+            "url": "https://www.trtrussian.com/article/6221547",
+            "content": "Через 2 недели после краха Finiko одного из ее основателей – казанца Кирилла Доронина арестовали. Финансовая пирамида – не первый его проект."
+          }
+        ]
+      },
+      "error": null,
+      "red_flags": [
+        "пирамид"
+      ]
+    },
+    {
+      "source": "duckduckgo_instant_answer",
+      "ok": false,
+      "data": null,
+      "error": "timeout",
+      "red_flags": []
+    },
+    {
+      "source": "regulator_blacklist_local",
+      "ok": true,
+      "data": {
+        "lists_checked": 2,
+        "matches": [
+          {
+            "regulator": "АФМ РК (Агентство по финансовому мониторингу Республики Казахстан) — организации с признаками финансовой пирамиды",
+            "name": "Finiko",
+            "domains": [],
+            "note": "статус: приговор суда вынесен"
+          }
+        ]
+      },
+      "error": null,
+      "red_flags": [
+        "пирамид"
+      ]
+    },
+    {
+      "source": "username_enumeration",
+      "ok": true,
+      "data": {
+        "github": {
+          "url": "https://github.com/Finiko",
+          "exists": true,
+          "status": 200
+        },
+        "instagram": {
+          "url": "https://www.instagram.com/Finiko/",
+          "exists": true,
+          "status": 200
+        },
+        "x_twitter": {
+          "url": "https://x.com/Finiko",
+          "exists": true,
+          "status": 200
+        },
+        "tiktok": {
+          "url": "https://www.tiktok.com/@Finiko",
+          "exists": true,
+          "status": 200
+        },
+        "telegram": {
+          "url": "https://t.me/Finiko",
+          "exists": true,
+          "status": 200
+        },
+        "reddit": {
+          "url": "https://www.reddit.com/user/Finiko",
+          "exists": true,
+          "status": 200
+        },
+        "youtube": {
+          "url": "https://www.youtube.com/@Finiko",
+          "exists": true,
+          "status": 200
+        }
+      },
+      "error": null,
+      "red_flags": []
+    },
+    {
+      "source": "threat_actor_username_search",
+      "ok": true,
+      "data": {
+        "found": false,
+        "hit_count": 0,
+        "forums": [],
+        "low_confidence": false
+      },
+      "error": null,
+      "red_flags": []
+    },
+    {
+      "source": "onionclaw_darknet_search",
+      "ok": true,
+      "data": {
+        "enabled": false,
+        "note": "darknet search disabled — set ENABLE_DARKNET_SEARCH=1 and ONIONCLAW_PATH after reading the legal notice in README.md"
+      },
+      "error": null,
+      "red_flags": []
+    }
+  ],
+  "risk_score": 60,
+  "risk_flags": [
+    "пирамид"
+  ],
+  "summary": "# Отчёт по объекту \"Finiko\"\n\n**Что за объект:** Известная российская финансовая пирамида (Казань, с 2019 г.), основатель — Кирилл Доронин. Username \"Finiko\" в соцсетях (GitHub, Instagram, X, TikTok, Telegram, Reddit, YouTube) — скорее всего используется для мониторинга/архива темы, либо мошенническими аккаунтами-клонами, а не официальным проектом.\n\n**Признаки пирамиды/мошенничества — подтверждено:**\n- Множественные независимые СМИ (Wikipedia, Kommersant, Interfax, RBC, Forbes, Meduza, DW, Свобода) единогласно называют Finiko финансовой пирамидой.\n- Ущерб вкладчикам >1 млрд руб. (по некоторым оценкам — до 7 млрд руб.), пострадавших ~7700 человек.\n- Обещанная доходность 20–30%/мес. — классический признак пирамиды.\n- Regulator blacklist: внесён в список АФМ РК с пометкой \"приговор суда вынесен\".\n- Внесён в предупреждающий список ЦБ РФ (cbr.ru) с перечнем связанных доменов.\n- Уголовные дела, задержания руководителей, экстрадиция соучредительницы из Турции (2026).\n\n**Опровергающих фактов нет.**\n\n**Ограничения данных:** darknet-поиск отключён, threat-actor поиск дал 0 совпадений (низкая информативность из-за отсутствия данных, а не \"чисто\"), DuckDuckGo — таймаут.\n\n**Вывод:** Высокий риск подтверждён (рекомендую поднять score до 90+). Объект — доказанная фин",
+  "recurrence": [
+    {
+      "id": 522,
+      "query": "Finiko",
+      "query_type": "username",
+      "risk_score": 60,
+      "created_at": "2026-07-22 18:39:13"
+    },
+    {
+      "id": 520,
+      "query": "Finiko",
+      "query_type": "username",
+      "risk_score": 60,
+      "created_at": "2026-07-22 18:38:42"
+    },
+    {
+      "id": 517,
+      "query": "Finiko",
+      "query_type": "name_or_org",
+      "risk_score": 60,
+      "created_at": "2026-07-22 18:38:15"
+    },
+    {
+      "id": 515,
+      "query": "Crowd1",
+      "query_type": "username",
+      "risk_score": 60,
+      "created_at": "2026-07-22 18:37:05"
+    },
+    {
+      "id": 514,
+      "query": "Qnet",
+      "query_type": "username",
+      "risk_score": 70,
+      "created_at": "2026-07-22 18:36:48"
+    },
+    {
+      "id": 511,
+      "query": "Finiko",
+      "query_type": "username",
+      "risk_score": 60,
+      "created_at": "2026-07-22 18:36:27"
+    },
+    {
+      "id": 483,
+      "query": "Finiko",
+      "query_type": "name_or_org",
+      "risk_score": 60,
+      "created_at": "2026-07-22 18:34:45"
+    },
+    {
+      "id": 59,
+      "query": "Finiko",
+      "query_type": "name_or_org",
+      "risk_score": 60,
+      "created_at": "2026-07-21 17:50:24"
+    },
+    {
+      "id": 24,
+      "query": "cryptoking",
+      "query_type": "username",
+      "risk_score": 0,
+      "created_at": "2026-07-21 17:14:15"
+    },
+    {
+      "id": 23,
+      "query": "Qnet",
+      "query_type": "username",
+      "risk_score": 70,
+      "created_at": "2026-07-21 17:00:53"
+    },
+    {
+      "id": 22,
+      "query": "Finiko",
+      "query_type": "username",
+      "risk_score": 60,
+      "created_at": "2026-07-21 17:00:28"
+    },
+    {
+      "id": 21,
+      "query": "Finiko",
+      "query_type": "name_or_org",
+      "risk_score": 60,
+      "created_at": "2026-07-21 16:59:37"
+    },
+    {
+      "id": 20,
+      "query": "Finiko",
+      "query_type": "username",
+      "risk_score": 0,
+      "created_at": "2026-07-21 16:59:24"
+    },
+    {
+      "id": 14,
+      "query": "test",
+      "query_type": "username",
+      "risk_score": 0,
+      "created_at": "2026-07-21 16:34:44"
+    }
+  ]
+}

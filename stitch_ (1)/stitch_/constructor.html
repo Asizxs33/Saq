@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Test Constructor — LuminaPortal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: { "primary": "#4848e5", "background-light": "#f6f6f8", "background-dark": "#111121" },
+        fontFamily: { "display": ["Inter"] },
+        borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+      },
+    },
+  }
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .question-card { transition: box-shadow 0.2s, border-color 0.2s; }
+  .question-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
+  .dragging { opacity: 0.5; box-shadow: 0 8px 30px rgba(72,72,229,0.2); }
+  #previewModal { display: none; }
+  #previewModal.open { display: flex; }
+  #publishModal { display: none; }
+  #publishModal.open { display: flex; }
+  .option-correct { border-color: #4848e5; background-color: rgba(72,72,229,0.05); }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+
+<!-- Preview Modal -->
+<div id="previewModal" class="fixed inset-0 z-50 items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+  <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col">
+    <div class="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-800">
+      <h3 class="text-xl font-bold flex items-center gap-2"><span class="material-symbols-outlined text-primary">visibility</span> Test Preview</h3>
+      <button onclick="closePreview()" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div class="flex-1 overflow-y-auto p-6" id="previewContent"></div>
+    <div class="p-6 border-t border-slate-200 dark:border-slate-800 flex justify-end gap-3">
+      <button onclick="closePreview()" class="px-6 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Close</button>
+      <button onclick="closePreview(); publishTest()" class="px-6 py-2.5 bg-primary text-white rounded-xl font-bold hover:bg-primary/90 transition-colors flex items-center gap-2">
+        <span class="material-symbols-outlined text-sm">rocket_launch</span> Publish
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Publish Success Modal -->
+<div id="publishModal" class="fixed inset-0 z-50 items-center justify-center bg-black/60 backdrop-blur-sm">
+  <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl p-8 max-w-sm w-full text-center mx-4">
+    <div class="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+      <span class="material-symbols-outlined text-emerald-500 text-3xl" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24">check_circle</span>
+    </div>
+    <h3 class="text-2xl font-bold mb-2">Test Published!</h3>
+    <p class="text-slate-500 dark:text-slate-400 mb-6">Your test has been saved and is now available to students.</p>
+    <div class="flex gap-3">
+      <button onclick="document.getElementById('publishModal').classList.remove('open')" class="flex-1 py-3 border border-slate-200 dark:border-slate-700 rounded-xl font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Stay Here</button>
+      <a href="admin.html" class="flex-1 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primary/90 transition-colors flex items-center justify-center">Go to Admin</a>
+    </div>
+  </div>
+</div>
+
+<div class="flex h-full min-h-screen w-full flex-col">
+
+  <!-- Top Navigation -->
+  <header class="flex items-center justify-between whitespace-nowrap border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 lg:px-10 py-3 sticky top-0 z-40">
+    <div class="flex items-center gap-4 text-primary">
+      <div class="size-8 flex items-center justify-center bg-primary rounded-lg text-white">
+        <span class="material-symbols-outlined">quiz</span>
+      </div>
+      <h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">Test Constructor</h2>
+    </div>
+    <div class="flex flex-1 justify-end gap-6 items-center">
+      <nav class="hidden md:flex items-center gap-8">
+        <a class="text-slate-600 dark:text-slate-400 hover:text-primary text-sm font-medium transition-colors" href="index.html">Dashboard</a>
+        <a class="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="constructor.html">Tests</a>
+        <a class="text-slate-600 dark:text-slate-400 hover:text-primary text-sm font-medium transition-colors" href="admin.html">Analytics</a>
+      </nav>
+      <div class="flex gap-2">
+        <button id="themeToggle" class="flex size-10 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" title="Toggle theme">
+          <span class="material-symbols-outlined text-xl" id="themeIcon">dark_mode</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex flex-1 overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside class="hidden lg:flex w-64 flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 gap-6 flex-shrink-0">
+      <div>
+        <h3 class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest px-3 mb-2">Workspace</h3>
+        <div class="flex flex-col gap-1">
+          <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary font-semibold" href="#">
+            <span class="material-symbols-outlined">edit_note</span><span class="text-sm">Current Draft</span>
+          </a>
+          <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" href="#">
+            <span class="material-symbols-outlined">cloud_done</span><span class="text-sm">Published</span>
+          </a>
+          <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" href="#">
+            <span class="material-symbols-outlined">inventory_2</span><span class="text-sm">Archived</span>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest px-3 mb-2">Resources</h3>
+        <div class="flex flex-col gap-1">
+          <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" href="#">
+            <span class="material-symbols-outlined">database</span><span class="text-sm">Question Bank</span>
+          </a>
+          <button onclick="generateAIQuestions()" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all w-full text-left">
+            <span class="material-symbols-outlined">auto_awesome</span><span class="text-sm">AI Generator</span>
+          </button>
+        </div>
+      </div>
+      <div class="mt-auto p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
+        <p class="text-xs text-slate-500 dark:text-slate-400 font-medium mb-1">Storage used</p>
+        <div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full mb-2">
+          <div id="storageBar" class="bg-primary h-full rounded-full" style="width: 65%"></div>
+        </div>
+        <p id="storageLabel" class="text-[10px] text-slate-400 dark:text-slate-500">Loading...</p>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark p-6 lg:p-10">
+      <div class="max-w-4xl mx-auto space-y-8">
+
+        <!-- Header Actions -->
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-6">
+          <div class="space-y-1">
+            <nav class="flex text-xs text-slate-400 dark:text-slate-500 gap-2 items-center mb-2 font-medium">
+              <span>Tests</span>
+              <span class="material-symbols-outlined text-xs">chevron_right</span>
+              <span class="text-primary">New Assessment</span>
+            </nav>
+            <input id="testTitleInput" type="text" value="Engineering Certification 2024"
+              class="text-3xl font-black text-slate-900 dark:text-white tracking-tight bg-transparent border-0 border-b-2 border-transparent focus:border-primary focus:ring-0 outline-none w-full p-0 placeholder:text-slate-300"
+              placeholder="Enter test title..."/>
+            <div class="flex gap-4 mt-2">
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-slate-400">Duration:</span>
+                <input id="durationInput" type="number" value="30" min="1" max="300"
+                  class="w-16 text-sm font-bold bg-slate-100 dark:bg-slate-800 border-0 rounded-lg px-2 py-1 text-center focus:ring-2 focus:ring-primary/50 outline-none"/>
+                <span class="text-xs text-slate-400">min</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-slate-400">Passing:</span>
+                <input id="passingInput" type="number" value="70" min="0" max="100"
+                  class="w-16 text-sm font-bold bg-slate-100 dark:bg-slate-800 border-0 rounded-lg px-2 py-1 text-center focus:ring-2 focus:ring-primary/50 outline-none"/>
+                <span class="text-xs text-slate-400">%</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex gap-3 flex-shrink-0">
+            <button onclick="showPreview()" class="px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-semibold flex items-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+              <span class="material-symbols-outlined text-sm">visibility</span> Preview
+            </button>
+            <button onclick="publishTest()" class="px-6 py-2 rounded-lg bg-primary text-white text-sm font-bold flex items-center gap-2 hover:opacity-90 transition-opacity shadow-lg shadow-primary/20">
+              <span class="material-symbols-outlined text-sm">rocket_launch</span> Publish
+            </button>
+          </div>
+        </div>
+
+        <!-- Import Zone -->
+        <div id="importZone" class="bg-white dark:bg-slate-900 border-2 border-dashed border-primary/30 rounded-xl p-8 text-center space-y-4 hover:border-primary/60 transition-colors cursor-pointer"
+          ondragover="event.preventDefault(); this.classList.add('border-primary','bg-primary/5')"
+          ondragleave="this.classList.remove('border-primary','bg-primary/5')"
+          ondrop="handleDrop(event)"
+          onclick="document.getElementById('fileInput').click()">
+          <input type="file" id="fileInput" class="hidden" accept=".csv,.json,.txt" onchange="handleFileImport(this)"/>
+          <div class="size-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined text-3xl">upload_file</span>
+          </div>
+          <div class="space-y-1">
+            <h3 class="text-lg font-bold">Import from file</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400 max-w-sm mx-auto">Drop your CSV, JSON, or TXT file here to batch upload questions instantly.</p>
+          </div>
+          <div class="flex items-center justify-center gap-2 pt-2">
+            <span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded text-[10px] font-bold text-slate-500 uppercase tracking-wider">.csv</span>
+            <span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded text-[10px] font-bold text-slate-500 uppercase tracking-wider">.json</span>
+            <span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded text-[10px] font-bold text-slate-500 uppercase tracking-wider">.txt</span>
+          </div>
+        </div>
+
+        <!-- Questions List -->
+        <div class="space-y-6">
+          <div class="flex items-center justify-between">
+            <h2 class="text-xl font-bold flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">list_alt</span>
+              Questions (<span id="questionCount">0</span>)
+            </h2>
+            <div class="flex gap-2">
+              <button onclick="sortQuestions()" class="p-2 text-slate-400 hover:text-primary transition-colors" title="Sort questions">
+                <span class="material-symbols-outlined">sort</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Questions container -->
+          <div id="questionsContainer" class="space-y-4"></div>
+
+          <!-- Add Question Section -->
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center gap-4">
+              <div class="h-px flex-1 bg-slate-200 dark:bg-slate-800"></div>
+              <span class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Add Question</span>
+              <div class="h-px flex-1 bg-slate-200 dark:bg-slate-800"></div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <button onclick="addQuestion('single')" class="flex flex-col items-center gap-2 p-4 rounded-xl border-2 border-slate-100 dark:border-slate-800 hover:border-primary hover:bg-primary/5 transition-all group">
+                <span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">radio_button_checked</span>
+                <span class="text-sm font-bold">Single Choice</span>
+              </button>
+              <button onclick="addQuestion('multiple')" class="flex flex-col items-center gap-2 p-4 rounded-xl border-2 border-slate-100 dark:border-slate-800 hover:border-primary hover:bg-primary/5 transition-all group">
+                <span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">check_box</span>
+                <span class="text-sm font-bold">Multiple Choice</span>
+              </button>
+              <button onclick="addQuestion('text')" class="flex flex-col items-center gap-2 p-4 rounded-xl border-2 border-slate-100 dark:border-slate-800 hover:border-primary hover:bg-primary/5 transition-all group">
+                <span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">notes</span>
+                <span class="text-sm font-bold">Free Text</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+// ===== THEME =====
+function applyTheme() {
+  const stored = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const isDark = stored === 'dark' || (!stored && prefersDark);
+  document.documentElement.classList.toggle('dark', isDark);
+  document.getElementById('themeIcon').textContent = isDark ? 'light_mode' : 'dark_mode';
+}
+applyTheme();
+document.getElementById('themeToggle').addEventListener('click', () => {
+  const isDark = document.documentElement.classList.toggle('dark');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  document.getElementById('themeIcon').textContent = isDark ? 'light_mode' : 'dark_mode';
+});
+
+// ===== STATE =====
+let questions = [];
+let nextId = 1;
+
+// Load saved draft from localStorage
+function loadDraft() {
+  const saved = localStorage.getItem('constructorDraft');
+  if (saved) {
+    try {
+      const draft = JSON.parse(saved);
+      if (draft.title) document.getElementById('testTitleInput').value = draft.title;
+      if (draft.duration) document.getElementById('durationInput').value = draft.duration;
+      if (draft.passing) document.getElementById('passingInput').value = draft.passing;
+      if (draft.questions) {
+        draft.questions.forEach(q => addQuestion(q.type, q));
+      }
+    } catch(e) {}
+  } else {
+    // Add sample questions on first load
+    addQuestion('single', {
+      text: 'Define the core principles of thermodynamic equilibrium?',
+      options: ['System remains static in all states', 'Energy is constantly added', 'Pressure exceeds atmospheric level', 'Temperature stabilizes across all components'],
+      correct: [0]
+    });
+    addQuestion('multiple', {
+      text: 'Which of these components are required for a standard PV system?',
+      options: ['Inverter Unit', 'Solar Panels', 'Gas Turbine', 'Battery Storage'],
+      correct: [0, 1, 3]
+    });
+    addQuestion('text', {
+      text: 'Explain the impact of material fatigue in high-altitude aeronautics.',
+      options: [], correct: []
+    });
+  }
+}
+
+function saveDraft() {
+  const draft = {
+    title: document.getElementById('testTitleInput').value,
+    duration: document.getElementById('durationInput').value,
+    passing: document.getElementById('passingInput').value,
+    questions: questions.map(q => ({
+      id: q.id, type: q.type, text: q.text,
+      options: q.options, correct: q.correct
+    }))
+  };
+  localStorage.setItem('constructorDraft', JSON.stringify(draft));
+}
+
+// ===== ADD QUESTION =====
+function addQuestion(type, data) {
+  const id = nextId++;
+  const q = {
+    id, type,
+    text: data?.text || '',
+    options: data?.options || (type !== 'text' ? ['Option A', 'Option B', 'Option C', ''] : []),
+    correct: data?.correct || (type !== 'text' ? [0] : [])
+  };
+  questions.push(q);
+  renderQuestion(q);
+  updateCount();
+  saveDraft();
+  // Scroll to new question
+  setTimeout(() => {
+    const el = document.getElementById('question-' + id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 100);
+}
+
+// ===== RENDER QUESTION =====
+function renderQuestion(q) {
+  const container = document.getElementById('questionsContainer');
+  const typeColors = { single: 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400', multiple: 'bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400', text: 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400' };
+  const typeLabels = { single: 'Single Choice', multiple: 'Multiple Choice', text: 'Free Text' };
+  const qIndex = questions.findIndex(x => x.id === q.id);
+
+  const div = document.createElement('div');
+  div.id = 'question-' + q.id;
+  div.className = 'question-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 relative group';
+  div.setAttribute('draggable', 'true');
+  div.addEventListener('dragstart', () => div.classList.add('dragging'));
+  div.addEventListener('dragend', () => div.classList.remove('dragging'));
+
+  div.innerHTML = `
+    <div class="flex flex-col gap-4">
+      <div class="flex items-start justify-between">
+        <div class="flex items-center gap-3">
+          <span class="flex items-center justify-center size-7 rounded-lg bg-slate-100 dark:bg-slate-800 text-sm font-bold text-slate-500 cursor-grab active:cursor-grabbing" title="Drag to reorder">⠿</span>
+          <span class="px-2 py-0.5 rounded-full ${typeColors[q.type]} text-[10px] font-bold uppercase tracking-wider">${typeLabels[q.type]}</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <button onclick="duplicateQuestion(${q.id})" class="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 transition-colors" title="Duplicate">
+            <span class="material-symbols-outlined text-lg">content_copy</span>
+          </button>
+          <button onclick="deleteQuestion(${q.id})" class="p-1.5 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg text-slate-400 hover:text-red-500 transition-colors" title="Delete">
+            <span class="material-symbols-outlined text-lg">delete</span>
+          </button>
+        </div>
+      </div>
+
+      <input type="text" placeholder="Type your question here..."
+        value="${escapeHtml(q.text)}"
+        oninput="updateQuestionText(${q.id}, this.value)"
+        class="w-full bg-transparent border-0 border-b-2 border-transparent focus:border-primary focus:ring-0 p-0 text-lg font-semibold text-slate-900 dark:text-white placeholder:text-slate-300 outline-none"/>
+
+      ${q.type === 'text' ? renderTextAnswer(q) : renderOptions(q)}
+    </div>
+  `;
+
+  container.appendChild(div);
+}
+
+function renderOptions(q) {
+  const isSingle = q.type === 'single';
+  let html = '<div class="' + (isSingle ? 'grid grid-cols-1 sm:grid-cols-2 gap-3' : 'space-y-2') + ' mt-2">';
+
+  q.options.forEach((opt, idx) => {
+    const isCorrect = q.correct.includes(idx);
+    html += `
+      <div class="flex items-center gap-3 p-3 rounded-lg border-2 ${isCorrect ? 'border-primary bg-primary/5' : 'border-slate-200 dark:border-slate-800'} transition-all">
+        <button type="button" onclick="toggleCorrect(${q.id}, ${idx})" class="flex-shrink-0 ${isSingle ? 'w-4 h-4 rounded-full' : 'w-4 h-4 rounded'} border-2 flex items-center justify-center ${isCorrect ? 'border-primary bg-primary' : 'border-slate-300 dark:border-slate-600'} transition-all" title="Mark as correct">
+          ${isCorrect ? '<span class="material-symbols-outlined text-white" style="font-size:10px;font-variation-settings:\'FILL\' 1,\'wght\' 700,\'GRAD\' 0,\'opsz\' 24">check</span>' : ''}
+        </button>
+        <input type="text" value="${escapeHtml(opt)}" placeholder="Option ${String.fromCharCode(65+idx)}..."
+          oninput="updateOption(${q.id}, ${idx}, this.value)"
+          class="bg-transparent border-0 focus:ring-0 p-0 text-sm flex-1 outline-none placeholder:text-slate-300"/>
+        ${q.options.length > 2 ? `<button onclick="removeOption(${q.id}, ${idx})" class="text-slate-300 hover:text-red-500 transition-colors flex-shrink-0" title="Remove option">
+          <span class="material-symbols-outlined text-sm">close</span>
+        </button>` : ''}
+      </div>
+    `;
+  });
+
+  // Add option button
+  if (q.options.length < 6) {
+    html += `
+      <button onclick="addOption(${q.id})" class="flex items-center justify-center gap-2 p-3 rounded-lg border-2 border-dashed border-slate-200 dark:border-slate-800 text-slate-400 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+        <span class="material-symbols-outlined text-sm">add</span> Add Option
+      </button>
+    `;
+  }
+
+  html += '</div>';
+  return html;
+}
+
+function renderTextAnswer(q) {
+  return `
+    <div class="w-full h-24 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-800 flex items-center justify-center p-4">
+      <p class="text-xs text-slate-400 dark:text-slate-500 text-center italic">Respondents will see a multi-line text area here. Max characters: 5000.</p>
+    </div>
+  `;
+}
+
+function escapeHtml(str) {
+  return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ===== ACTIONS =====
+function updateQuestionText(id, val) {
+  const q = questions.find(q => q.id === id);
+  if (q) { q.text = val; saveDraft(); }
+}
+
+function updateOption(id, idx, val) {
+  const q = questions.find(q => q.id === id);
+  if (q) { q.options[idx] = val; saveDraft(); }
+}
+
+function toggleCorrect(id, idx) {
+  const q = questions.find(q => q.id === id);
+  if (!q) return;
+  if (q.type === 'single') {
+    q.correct = [idx];
+  } else {
+    if (q.correct.includes(idx)) {
+      q.correct = q.correct.filter(c => c !== idx);
+    } else {
+      q.correct.push(idx);
+    }
+  }
+  rerenderQuestion(q);
+  saveDraft();
+}
+
+function addOption(id) {
+  const q = questions.find(q => q.id === id);
+  if (q && q.options.length < 6) {
+    q.options.push('');
+    rerenderQuestion(q);
+    saveDraft();
+  }
+}
+
+function removeOption(id, idx) {
+  const q = questions.find(q => q.id === id);
+  if (q && q.options.length > 2) {
+    q.options.splice(idx, 1);
+    q.correct = q.correct.filter(c => c !== idx).map(c => c > idx ? c - 1 : c);
+    rerenderQuestion(q);
+    saveDraft();
+  }
+}
+
+function rerenderQuestion(q) {
+  const el = document.getElementById('question-' + q.id);
+  if (el) { el.remove(); }
+  // Reinsert at correct position
+  const container = document.getElementById('questionsContainer');
+  const idx = questions.findIndex(x => x.id === q.id);
+  const afterEl = container.children[idx];
+  const newEl = document.createElement('div');
+  document.getElementById('questionsContainer').insertBefore(newEl, afterEl || null);
+  newEl.remove();
+  // Re-render
+  const tempDiv = document.createElement('div');
+  tempDiv.id = 'question-' + q.id;
+  const qIndex = questions.findIndex(x => x.id === q.id);
+  // Simple: just append and reorder
+  document.getElementById('questionsContainer').appendChild(tempDiv);
+  tempDiv.remove();
+  // Actually re-render properly
+  renderQuestionAt(q, idx);
+}
+
+function renderQuestionAt(q, idx) {
+  const container = document.getElementById('questionsContainer');
+  const existing = document.getElementById('question-' + q.id);
+  if (existing) existing.remove();
+
+  // Create and render to temp
+  const fakeContainer = document.createElement('div');
+  fakeContainer.id = 'questionsContainer';
+  document.body.appendChild(fakeContainer);
+  renderQuestion(q);
+  fakeContainer.remove();
+
+  // Get the rendered element
+  const newEl = document.getElementById('question-' + q.id);
+  if (newEl) {
+    newEl.remove();
+    const children = container.children;
+    if (idx < children.length) {
+      container.insertBefore(newEl, children[idx]);
+    } else {
+      container.appendChild(newEl);
+    }
+  }
+}
+
+function deleteQuestion(id) {
+  if (!confirm('Delete this question?')) return;
+  const el = document.getElementById('question-' + id);
+  if (el) el.style.transform = 'scale(0.95)';
+  setTimeout(() => {
+    if (el) el.remove();
+    questions = questions.filter(q => q.id !== id);
+    updateCount();
+    saveDraft();
+  }, 150);
+}
+
+function duplicateQuestion(id) {
+  const q = questions.find(q => q.id === id);
+  if (!q) return;
+  addQuestion(q.type, { text: q.text + ' (Copy)', options: [...q.options], correct: [...q.correct] });
+}
+
+function updateCount() {
+  document.getElementById('questionCount').textContent = questions.length;
+  // Update storage bar
+  const pct = Math.min(100, Math.round((questions.length / 50) * 100));
+  document.getElementById('storageBar').style.width = (65 + pct * 0.35) + '%';
+  document.getElementById('storageLabel').textContent = questions.length + ' / 50 Questions';
+}
+
+function sortQuestions() {
+  questions.sort((a, b) => a.type.localeCompare(b.type));
+  const container = document.getElementById('questionsContainer');
+  container.innerHTML = '';
+  questions.forEach(q => renderQuestion(q));
+}
+
+// ===== PREVIEW =====
+function showPreview() {
+  const content = document.getElementById('previewContent');
+  const title = document.getElementById('testTitleInput').value || 'Untitled Test';
+  const duration = document.getElementById('durationInput').value;
+  const passing = document.getElementById('passingInput').value;
+
+  content.innerHTML = `
+    <div class="mb-6 p-4 bg-primary/5 border border-primary/20 rounded-xl">
+      <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-1">${escapeHtml(title)}</h2>
+      <div class="flex gap-4 text-sm text-slate-500">
+        <span><strong>${questions.length}</strong> questions</span>
+        <span><strong>${duration}</strong> minutes</span>
+        <span>Passing: <strong>${passing}%</strong></span>
+      </div>
+    </div>
+    ${questions.length === 0 ? '<p class="text-center text-slate-400 py-8">No questions yet. Add some questions first.</p>' :
+      questions.map((q, i) => `
+        <div class="mb-6 p-4 border border-slate-200 dark:border-slate-800 rounded-xl">
+          <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Question ${i+1} • ${q.type === 'single' ? 'Single Choice' : q.type === 'multiple' ? 'Multiple Choice' : 'Free Text'}</p>
+          <p class="font-semibold text-slate-900 dark:text-white mb-3">${escapeHtml(q.text) || '<em class="text-slate-400">No question text</em>'}</p>
+          ${q.type !== 'text' ? q.options.map((opt, idx) => `
+            <div class="flex items-center gap-2 py-1">
+              <div class="w-3 h-3 rounded-full border-2 ${q.correct.includes(idx) ? 'border-primary bg-primary' : 'border-slate-300'} flex-shrink-0"></div>
+              <span class="text-sm ${q.correct.includes(idx) ? 'font-bold text-primary' : 'text-slate-600 dark:text-slate-400'}">${escapeHtml(opt) || '<em class="text-slate-300">Empty option</em>'}</span>
+              ${q.correct.includes(idx) ? '<span class="text-xs text-emerald-500 font-bold ml-auto">✓ Correct</span>' : ''}
+            </div>
+          `).join('') : '<div class="h-10 bg-slate-100 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 flex items-center px-3"><p class="text-xs text-slate-400 italic">Free text answer area</p></div>'}
+        </div>
+      `).join('')
+    }
+  `;
+  document.getElementById('previewModal').classList.add('open');
+}
+
+function closePreview() {
+  document.getElementById('previewModal').classList.remove('open');
+}
+
+// ===== PUBLISH =====
+function publishTest() {
+  const title = document.getElementById('testTitleInput').value || 'Untitled Test';
+  const duration = document.getElementById('durationInput').value;
+  const passing = document.getElementById('passingInput').value;
+
+  const published = JSON.parse(localStorage.getItem('publishedTests') || '[]');
+  published.push({
+    id: 'custom-' + Date.now(),
+    title, duration: parseInt(duration), passing: parseInt(passing),
+    questions, publishedAt: new Date().toISOString()
+  });
+  localStorage.setItem('publishedTests', JSON.stringify(published));
+  localStorage.removeItem('constructorDraft');
+  document.getElementById('publishModal').classList.add('open');
+}
+
+// ===== FILE IMPORT =====
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('importZone').classList.remove('border-primary', 'bg-primary/5');
+  const file = e.dataTransfer.files[0];
+  if (file) processFile(file);
+}
+
+function handleFileImport(input) {
+  const file = input.files[0];
+  if (file) processFile(file);
+}
+
+function processFile(file) {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const text = e.target.result;
+    let parsed = [];
+
+    if (file.name.endsWith('.json')) {
+      try { parsed = JSON.parse(text); } catch(err) { alert('Invalid JSON file'); return; }
+    } else if (file.name.endsWith('.csv') || file.name.endsWith('.txt')) {
+      // Simple CSV: question,optionA,optionB,optionC,optionD,correctIndex
+      const lines = text.split('\n').filter(l => l.trim());
+      lines.forEach(line => {
+        const parts = line.split(',').map(p => p.trim().replace(/^"|"$/g,''));
+        if (parts.length >= 3) {
+          parsed.push({
+            type: 'single',
+            text: parts[0],
+            options: parts.slice(1, -1),
+            correct: [parseInt(parts[parts.length-1]) || 0]
+          });
+        }
+      });
+    }
+
+    if (parsed.length > 0) {
+      parsed.forEach(q => addQuestion(q.type || 'single', q));
+      alert(`Successfully imported ${parsed.length} question(s)!`);
+    } else {
+      alert('Could not parse file. Please check the format.');
+    }
+  };
+  reader.readAsText(file);
+}
+
+// ===== AI GENERATOR =====
+function generateAIQuestions() {
+  const topic = prompt('Enter a topic for AI question generation:', 'Quantum Physics');
+  if (!topic) return;
+
+  // Simulated AI generation
+  const templates = [
+    { text: `What is the fundamental principle of ${topic}?`, options: ['Conservation of energy', 'Relativity theory', 'Quantum superposition', 'Wave-particle duality'], correct: [0] },
+    { text: `Which scientist is most associated with ${topic}?`, options: ['Einstein', 'Newton', 'Bohr', 'Feynman'], correct: [0] },
+    { text: `In the context of ${topic}, what does the term "entropy" refer to?`, options: ['Measure of disorder', 'Energy level', 'Wave frequency', 'Particle spin'], correct: [0] },
+  ];
+
+  templates.forEach(t => addQuestion('single', t));
+  alert(`Generated ${templates.length} questions about "${topic}"`);
+}
+
+// ===== INIT =====
+loadDraft();
+
+// Auto-save on any input
+document.getElementById('testTitleInput').addEventListener('input', saveDraft);
+document.getElementById('durationInput').addEventListener('input', saveDraft);
+document.getElementById('passingInput').addEventListener('input', saveDraft);
+</script>
+</body>
+</html>

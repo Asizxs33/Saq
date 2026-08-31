@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<style>
+:root{
+  --bg:#090e1c; --bg-card:#141f36;
+  --ink:#f1f5f9; --ink-muted:#94a3b8; --ink-faint:#64748b;
+  --accent:#3b82f6; --accent-bright:#60a5fa;
+  --danger:#ef4444; --safe:#10b981;
+  --border:#1e293b; --border-strong:#334155;
+  --font-display:"Segoe UI Semibold","Segoe UI",system-ui,sans-serif;
+  --font-body:"Segoe UI",system-ui,sans-serif;
+  --font-mono:"Cascadia Mono",Consolas,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:transparent}
+body{
+  font-family:var(--font-body); font-size:14px; color:var(--ink);
+  user-select:none; overflow:hidden;
+  display:flex; flex-direction:column;
+}
+/* окно Electron прозрачное — рамку и тень рисуем сами CSS'ом, а не PIL/tkinter */
+.frame{
+  margin:10px; flex:1; display:flex; flex-direction:column;
+  background:linear-gradient(180deg, rgba(9,14,28,.97), rgba(9,14,28,.99));
+  border:1px solid var(--border-strong); border-radius:18px;
+  box-shadow:0 24px 60px -20px rgba(0,0,0,.75);
+  overflow:hidden; position:relative;
+}
+.frame::before{
+  content:""; position:absolute; inset:-30% -10% auto -10%; height:55%;
+  background:radial-gradient(60% 60% at 50% 0%,rgba(59,130,246,.16),transparent 70%);
+  pointer-events:none;
+}
+
+.titlebar{
+  height:36px; flex:0 0 36px; display:flex; align-items:center;
+  padding:0 6px 0 16px; -webkit-app-region:drag; position:relative; z-index:5;
+}
+.titlebar .brand{ font-family:var(--font-mono); font-size:9.5px; letter-spacing:.18em; color:var(--ink-faint) }
+.spacer{ flex:1 }
+.winbtn{
+  -webkit-app-region:no-drag; width:32px; height:24px; border:0; background:transparent;
+  cursor:pointer; color:var(--ink-faint); border-radius:6px; font-size:12px;
+  transition:background .15s,color .15s;
+}
+.winbtn:hover{ background:rgba(255,255,255,.08); color:var(--ink) }
+.winbtn.close:hover{ background:var(--danger); color:#fff }
+
+.scroll{ flex:1; overflow-y:auto; padding:6px 22px 22px; position:relative; z-index:1 }
+.scroll::-webkit-scrollbar{ width:8px }
+.scroll::-webkit-scrollbar-thumb{ background:var(--border-strong); border-radius:99px }
+.scroll::-webkit-scrollbar-track{ background:transparent }
+
+.hero{ display:flex; align-items:center; gap:14px; margin:6px 0 18px }
+.hero-mascot{ position:relative; width:64px; height:64px; flex:0 0 64px }
+.hero-mascot::before{
+  content:""; position:absolute; inset:-16%; border-radius:50%;
+  background:radial-gradient(circle,rgba(59,130,246,.35),transparent 68%);
+  animation:halo 3.4s ease-in-out infinite;
+}
+@keyframes halo{0%,100%{opacity:.5;transform:scale(.94)}50%{opacity:1;transform:scale(1.06)}}
+.hero-mascot svg{ position:relative; width:100%; height:100%; filter:drop-shadow(0 6px 16px rgba(47,106,232,.4)) }
+.hero h1{ font-family:var(--font-display); font-size:22px; font-weight:700; letter-spacing:-.02em }
+.hero p{ font-size:11px; color:var(--ink-faint); margin-top:2px }
+
+.card{
+  background:linear-gradient(160deg,rgba(20,31,54,.9),rgba(15,23,42,.75));
+  border:1px solid var(--border); border-radius:16px; padding:15px 17px; margin-bottom:12px;
+}
+.card-label{ font-family:var(--font-mono); font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:11px }
+
+.status-row{ display:flex; align-items:center; gap:9px }
+.dot{ width:9px;height:9px;border-radius:50%;background:var(--safe);position:relative }
+.dot::after{ content:"";position:absolute;inset:-5px;border-radius:50%;background:var(--safe);opacity:.28;animation:ping 2s ease-out infinite }
+@keyframes ping{0%{transform:scale(.6);opacity:.5}100%{transform:scale(1.5);opacity:0}}
+body.paused .dot{ background:var(--ink-faint) }
+body.paused .dot::after{ display:none }
+.status-text{ font-weight:600; font-size:13.5px }
+.switch{
+  margin-left:auto; width:44px; height:25px; border-radius:99px; cursor:pointer;
+  background:var(--accent); border:0; position:relative; transition:background .25s;
+}
+.switch::after{ content:"";position:absolute;top:3px;left:22px;width:19px;height:19px;border-radius:50%;background:#fff;transition:left .22s cubic-bezier(.34,1.4,.64,1) }
+body.paused .switch{ background:var(--border-strong) }
+body.paused .switch::after{ left:3px }
+.watching{ margin-top:10px; font-size:11px; color:var(--ink-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.watching b{ color:var(--accent-bright); font-weight:600 }
+
+.tiles{ display:flex; gap:9px; margin-top:13px }
+.tile{ flex:1; background:rgba(9,14,28,.7); border:1px solid var(--border); border-radius:12px; padding:10px 12px }
+.tile span{ display:block; font-family:var(--font-mono); font-size:8px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-faint) }
+.tile b{ display:block; font-family:var(--font-display); font-size:23px; font-weight:700; margin-top:2px }
+.tile.risk b{ color:var(--danger) }
+
+.setting{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px }
+.setting label{ font-size:12px; color:var(--ink-muted) }
+.setting .val{ font-family:var(--font-mono); font-size:12px; font-weight:700; color:var(--accent-bright) }
+input[type=range]{
+  -webkit-appearance:none; width:100%; height:5px; border-radius:99px; margin:2px 0 14px;
+  background:linear-gradient(90deg,var(--accent) var(--pct,50%),var(--border) var(--pct,50%)); outline:none; cursor:pointer;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none; width:16px; height:16px; border-radius:50%; background:#fff;
+  border:3px solid var(--accent); cursor:pointer; box-shadow:0 2px 8px rgba(59,130,246,.5);
+}
+input[type=text]{
+  background:rgba(9,14,28,.75); border:1px solid var(--border-strong); border-radius:9px;
+  color:var(--ink); font-family:var(--font-mono); font-size:11px; padding:6px 9px; width:190px; outline:none;
+  user-select:text; transition:border-color .18s;
+}
+input[type=text]:focus{ border-color:var(--accent) }
+
+.log-head{ display:flex; align-items:center; gap:10px; margin:16px 2px 9px }
+.log-head h2{ font-family:var(--font-mono); font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-faint) }
+.log-head .line{ flex:1; height:1px; background:var(--border) }
+.log-head .count{ font-family:var(--font-mono); font-size:9.5px; color:var(--ink-faint) }
+
+.empty{ text-align:center; padding:18px 8px 26px; color:var(--ink-faint); font-size:11.5px; line-height:1.6 }
+.empty svg{ width:58px; height:58px; opacity:.85; margin-bottom:8px }
+
+.entry{
+  display:flex; align-items:center; gap:11px; padding:11px 13px; margin-bottom:7px; cursor:pointer;
+  background:linear-gradient(160deg,rgba(20,31,54,.9),rgba(15,23,42,.68));
+  border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:12px;
+  animation:slidein .35s cubic-bezier(.34,1.3,.64,1) both; transition:border-color .15s, transform .12s;
+}
+.entry:hover{ border-color:var(--border-strong); transform:translateX(2px) }
+.entry.high{ border-left-color:var(--danger) }
+@keyframes slidein{ from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:none} }
+.entry .body{ min-width:0; flex:1 }
+.entry .val{ font-family:var(--font-mono); font-size:12px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.entry .meta{ font-size:10px; color:var(--ink-faint); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.entry .score{ font-family:var(--font-display); font-size:19px; font-weight:700 }
+.entry .score.high{ color:var(--danger) } .entry .score.mid{ color:var(--accent-bright) } .entry .score.low{ color:var(--safe) }
+.entry .kind{ font-family:var(--font-mono); font-size:8px; letter-spacing:.1em; text-transform:uppercase; padding:3px 7px; border-radius:99px; background:rgba(239,68,68,.12); color:var(--danger) }
+
+.overlay{ position:fixed; inset:0; z-index:50; display:none; background:rgba(5,9,20,.72); align-items:flex-end; justify-content:center }
+.overlay.open{ display:flex; animation:fade .2s ease both }
+@keyframes fade{ from{opacity:0} to{opacity:1} }
+.sheet{
+  width:100%; max-height:88%; overflow-y:auto;
+  background:linear-gradient(170deg,#16213a,#0d1526);
+  border:1px solid var(--border-strong); border-bottom:0;
+  border-radius:20px 20px 0 0; padding:18px 20px 22px;
+  animation:up .28s cubic-bezier(.34,1.3,.64,1) both;
+}
+@keyframes up{ from{transform:translateY(36px);opacity:0} to{transform:none;opacity:1} }
+.sheet .grab{ width:36px;height:4px;border-radius:99px;background:var(--border-strong);margin:0 auto 14px }
+.sheet .verdict{ display:flex; align-items:center; gap:13px; margin-bottom:14px }
+.sheet .verdict .gauge{
+  width:58px;height:58px;flex:0 0 58px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display); font-size:20px;font-weight:700;position:relative;
+}
+.sheet h3{ font-family:var(--font-mono); font-size:12px; word-break:break-all; line-height:1.4 }
+.sheet .sub{ font-size:10.5px; color:var(--ink-faint); margin-top:3px }
+.sect{ margin-top:16px }
+.sect .t{ font-family:var(--font-mono); font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:8px }
+.sect p{ font-size:12px; line-height:1.6; color:var(--ink-muted) }
+.why{ display:flex; gap:9px; padding:9px 11px; margin-bottom:6px; border-radius:10px; background:rgba(239,68,68,.07); border:1px solid rgba(239,68,68,.2) }
+.why .ic{ color:var(--danger); font-size:12px; line-height:1.3 }
+.why b{ display:block; font-size:11.5px; color:var(--ink); margin-bottom:2px; font-weight:600 }
+.why small{ font-size:10.5px; color:var(--ink-muted); line-height:1.5 }
+.todo{ display:flex; gap:9px; align-items:flex-start; padding:8px 0; border-bottom:1px solid var(--border) }
+.todo:last-child{ border-bottom:0 }
+.todo .n{ flex:0 0 19px;height:19px;border-radius:50%;background:#1e3a8a;color:var(--accent-bright);font-family:var(--font-mono);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px }
+.todo div{ font-size:11.5px; line-height:1.55; color:var(--ink-muted) }
+.sheet .close{ width:100%;margin-top:18px;padding:11px;border:0;border-radius:11px;cursor:pointer;background:var(--accent);color:#fff;font-size:12.5px;font-weight:600;transition:background .18s }
+.sheet .close:hover{ background:var(--accent-bright) }
+
+@keyframes aqyl-breathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-.8px) scale(1.03)}}
+.aqyl-breathe{ transform-box:fill-box;transform-origin:50% 70%;animation:aqyl-breathe 2.6s ease-in-out infinite }
+@keyframes aqyl-blink{0%,86%,100%{transform:scaleY(1)}90%,93%{transform:scaleY(.08)}}
+.aqyl-eyes{ transform-box:fill-box;transform-origin:center;animation:aqyl-blink 3.4s ease-in-out infinite }
+@keyframes aqyl-scan{0%,100%{transform:translateX(-1.7px)}50%{transform:translateX(1.7px)}}
+.aqyl-scan{ animation:aqyl-scan 1.5s ease-in-out infinite }
+@keyframes aqyl-wiggle{0%,74%,100%{transform:rotate(0)}80%{transform:rotate(-12deg)}88%{transform:rotate(9deg)}}
+.aqyl-ear{ transform-box:fill-box;transform-origin:50% 95%;animation:aqyl-wiggle 4.2s ease-in-out infinite }
+.aqyl-ear-r{ animation-delay:.35s }
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="titlebar">
+    <div class="brand">SAQ&nbsp;GUARDIAN</div>
+    <div class="spacer"></div>
+    <button class="winbtn" id="btnMin" title="Свернуть">&#8211;</button>
+    <button class="winbtn close" id="btnClose" title="Свернуть в трей">&#10005;</button>
+  </div>
+
+  <div class="scroll">
+    <div class="hero">
+      <div class="hero-mascot" id="mascot"></div>
+      <div>
+        <h1>SAQ Guardian</h1>
+        <p>Қаржы қорғаушысы · защита в реальном времени</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="status-row">
+        <div class="dot"></div>
+        <div class="status-text" id="status">Активен</div>
+        <button class="switch" id="toggle" title="Пауза / продолжить"></button>
+      </div>
+      <div class="watching">Слежу за: <b id="window">—</b></div>
+      <div class="tiles">
+        <div class="tile"><span>Проверено</span><b id="checked">0</b></div>
+        <div class="tile risk"><span>Найдено рисков</span><b id="flagged">0</b></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Настройки</div>
+      <div class="setting"><label>Порог риска</label><div class="val" id="thval">60</div></div>
+      <input type="range" id="threshold" min="10" max="100" step="5" value="60">
+      <div class="setting" style="margin-bottom:0">
+        <label>Backend URL</label>
+        <input type="text" id="backend" value="https://disposal-pliable-trial.ngrok-free.dev">
+      </div>
+    </div>
+
+    <div class="log-head"><h2>Лог находок</h2><div class="line"></div><div class="count" id="count">0</div></div>
+    <div id="log">
+      <div class="empty" id="empty">
+        <div id="empty-mascot"></div>
+        Пока чисто.<br>Aqyl присматривает за экраном — находки появятся здесь.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay"><div class="sheet" id="sheet"></div></div>
+
+<script src="renderer.js"></script>
+</body>
+</html>

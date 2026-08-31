@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Before You Begin - Assessment Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: { "primary": "#4848e5", "background-light": "#f6f6f8", "background-dark": "#111121" },
+        fontFamily: { "display": ["Inter", "sans-serif"] },
+        borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+      },
+    },
+  }
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex h-auto min-h-screen w-full flex-col">
+  <div class="layout-container flex h-full grow flex-col">
+
+    <!-- Header -->
+    <header class="flex items-center justify-between whitespace-nowrap border-b border-slate-200 dark:border-slate-800 px-6 md:px-20 py-4 bg-white dark:bg-slate-900">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="text-primary flex items-center justify-center">
+          <span class="material-symbols-outlined text-3xl font-bold">verified_user</span>
+        </a>
+        <h2 class="text-slate-900 dark:text-slate-100 text-xl font-extrabold leading-tight tracking-tight">Assessment Portal</h2>
+      </div>
+      <div class="flex items-center gap-3">
+        <span id="subjectBadge" class="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold"></span>
+        <button id="themeToggle" class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition-colors" title="Toggle theme">
+          <span class="material-symbols-outlined text-[20px]" id="themeIcon">dark_mode</span>
+        </button>
+        <a href="index.html" class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition-colors" title="Back to dashboard">
+          <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex flex-1 justify-center py-12 px-6">
+      <div class="flex flex-col max-w-[800px] flex-1">
+
+        <!-- Title -->
+        <div class="mb-10 text-center">
+          <h1 class="text-slate-900 dark:text-slate-100 text-4xl md:text-5xl font-black leading-tight tracking-tight mb-4">Before you begin</h1>
+          <p class="text-slate-600 dark:text-slate-400 text-lg">Please review the rules and ensure your environment is ready.</p>
+          <p id="testNameDisplay" class="text-primary font-bold text-xl mt-2"></p>
+        </div>
+
+        <!-- Rules Card -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl shadow-xl overflow-hidden border border-slate-200 dark:border-slate-800">
+          <div class="h-64 bg-slate-200 dark:bg-slate-800 relative">
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA923NEYpR-mv9O88bRziw4-jze8wMnoCONT94yZESP44Iuvq9JANA3BlwAWPXVm7UC207cZLPYnnl9kGxmAXyikxwqhZDadHqfUkrDlr_PGRjJMiJPjqH9eweNuT7vmUaMv55js8Vm04WfdxQ4ACgmps5RC45MRESq4R7X51rDFJnYg5UyTvlH1ZCXwn13f_7mI3zYqGxx0SGkvrPZluJFfdimiDK1tvAH31IuqnsZCdyYRwO1HwAuC6v7JcA38XLa3AdAYw3NGSM6')"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
+            <div class="absolute bottom-6 left-6 text-white">
+              <span id="examTypeBadge" class="px-3 py-1 bg-primary rounded-full text-xs font-bold uppercase tracking-wider">Certification Exam</span>
+            </div>
+          </div>
+          <div class="p-8">
+            <!-- Time limit -->
+            <div class="flex items-start gap-4 mb-8">
+              <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined text-2xl">timer</span>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-slate-100 mb-1">Time Limit</h3>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-lg">
+                  <span id="timeLimitText" class="font-bold text-slate-900 dark:text-slate-100">30 minutes total.</span> The timer starts as soon as you click the button below.
+                </p>
+              </div>
+            </div>
+            <!-- Anti-cheat -->
+            <div class="flex items-start gap-4 mb-8">
+              <div class="flex-shrink-0 w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-600">
+                <span class="material-symbols-outlined text-2xl">warning</span>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-slate-100 mb-1">Anti-Cheating Policy</h3>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-lg">
+                  <span class="font-bold text-slate-900 dark:text-slate-100">Do not switch tabs or minimize the window</span>, or the test will end automatically and your progress will be submitted immediately.
+                </p>
+              </div>
+            </div>
+            <!-- System check -->
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600">
+                <span class="material-symbols-outlined text-2xl">check_circle</span>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-slate-100 mb-1">System Check</h3>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-lg">
+                  Your session has been verified. Ensure you are in a quiet, well-lit environment with no distractions.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Practice mode notice -->
+        <div id="practiceNotice" class="hidden mt-6 p-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-700 rounded-xl">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-emerald-500">info</span>
+            <p class="text-emerald-700 dark:text-emerald-300 font-medium text-sm">Practice Mode — This test is not graded. Take your time to learn!</p>
+          </div>
+        </div>
+
+        <!-- Action -->
+        <div class="mt-10 flex flex-col items-center gap-6">
+          <button id="startBtn" class="w-full max-w-[480px] cursor-pointer flex items-center justify-center overflow-hidden rounded-xl h-16 px-10 bg-primary text-white text-xl font-black leading-normal tracking-wide shadow-lg shadow-primary/30 hover:bg-primary/90 transition-all hover:scale-[1.02] active:scale-[0.98]">
+            Start Test
+          </button>
+          <div class="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+            <span class="material-symbols-outlined text-sm">info</span>
+            <p class="text-sm font-medium leading-normal">By clicking Start, you agree to the terms of the assessment.</p>
+          </div>
+        </div>
+
+        <!-- Stats footer -->
+        <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 border-t border-slate-200 dark:border-slate-800 pt-8">
+          <div class="text-center">
+            <p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Questions</p>
+            <p id="statQuestions" class="text-xl font-bold text-slate-900 dark:text-slate-100">10</p>
+          </div>
+          <div class="text-center">
+            <p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Time Limit</p>
+            <p id="statDuration" class="text-xl font-bold text-slate-900 dark:text-slate-100">30 min</p>
+          </div>
+          <div class="text-center">
+            <p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Passing Score</p>
+            <p id="statPassing" class="text-xl font-bold text-slate-900 dark:text-slate-100">70%</p>
+          </div>
+          <div class="text-center">
+            <p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Format</p>
+            <p class="text-xl font-bold text-slate-900 dark:text-slate-100">Multiple Choice</p>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <footer class="py-6 px-10 border-t border-slate-200 dark:border-slate-800 text-center text-slate-400 dark:text-slate-600 text-xs">
+      © 2024 Assessment Portal Secure Systems. All Rights Reserved.
+    </footer>
+  </div>
+</div>
+
+<script>
+// Dark mode
+function applyTheme() {
+  const stored = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const isDark = stored === 'dark' || (!stored && prefersDark);
+  document.documentElement.classList.toggle('dark', isDark);
+  document.getElementById('themeIcon').textContent = isDark ? 'light_mode' : 'dark_mode';
+}
+applyTheme();
+document.getElementById('themeToggle').addEventListener('click', () => {
+  const isDark = document.documentElement.classList.toggle('dark');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  document.getElementById('themeIcon').textContent = isDark ? 'light_mode' : 'dark_mode';
+});
+
+// Read URL params
+const params = new URLSearchParams(window.location.search);
+const testId = params.get('id') || 'math';
+const testName = params.get('name') || 'Assessment';
+const duration = params.get('duration') || '30';
+const questions = params.get('questions') || '10';
+const passing = params.get('passing') || '70';
+const subject = params.get('subject') || 'General';
+const mode = params.get('mode') || '';
+
+// Update UI
+document.getElementById('testNameDisplay').textContent = testName;
+document.getElementById('timeLimitText').textContent = duration + ' minutes total.';
+document.getElementById('statQuestions').textContent = questions;
+document.getElementById('statDuration').textContent = duration + ' min';
+document.getElementById('statPassing').textContent = mode === 'practice' ? 'N/A' : (passing + '%');
+document.getElementById('subjectBadge').textContent = subject;
+
+if (mode === 'practice') {
+  document.getElementById('practiceNotice').classList.remove('hidden');
+  document.getElementById('examTypeBadge').textContent = 'Practice Mode';
+  document.getElementById('examTypeBadge').classList.replace('bg-primary', 'bg-emerald-500');
+  document.getElementById('startBtn').textContent = 'Start Practice';
+}
+
+// Navigate to test
+document.getElementById('startBtn').addEventListener('click', () => {
+  // Store test metadata in sessionStorage
+  sessionStorage.setItem('currentTest', JSON.stringify({
+    id: testId, name: testName, duration: parseInt(duration),
+    totalQuestions: parseInt(questions), passing: parseInt(passing),
+    subject, mode
+  }));
+  window.location.href = 'test.html?id=' + testId + (mode ? '&mode=' + mode : '');
+});
+</script>
+</body>
+</html>

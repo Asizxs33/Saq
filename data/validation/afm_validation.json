@@ -1,0 +1,696 @@
+[
+  {
+    "name": "Platincoin",
+    "note": "статус: досудебное расследование АФМ",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Свой дом",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Шаңырақ+",
+    "note": "статус: приговор суда вынесен (ТОО Best Road Investment)",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Investment Consulting Agency",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "LV Force",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "World money",
+    "note": "статус: досудебное расследование АФМ",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Великое будущее",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "ТОО Caspian Crocus",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 10,
+    "external_flags": [
+      "пирамид"
+    ],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "ПК Qaz home",
+    "note": "статус: судебное разбирательство",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 10,
+    "external_flags": [
+      "пирамид"
+    ],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Sterling Invest",
+    "note": "статус: досудебное расследование АФМ",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Best Road Investment",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 10,
+    "external_flags": [
+      "пирамид"
+    ],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "ПК GAP",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 10,
+    "external_flags": [
+      "пирамид"
+    ],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Antares",
+    "note": "статус: приговор суда вынесен (Antares Trade)",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "ПК Amanat home",
+    "note": "статус: досудебное расследование АФМ",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Qnet",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 4,
+    "connectors_run": 6
+  },
+  {
+    "name": "Бахыт мебель",
+    "note": "статус: расследование закрыто (нереабилитирующие основания)",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 4,
+    "connectors_run": 6
+  },
+  {
+    "name": "Нур-жиһаз",
+    "note": "статус: приговор суда вынесен (мебельный проект Нур)",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 10,
+    "external_flags": [
+      "пирамид"
+    ],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Crowd1",
+    "note": "статус: судебное разбирательство",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 10,
+    "external_flags": [
+      "пирамид"
+    ],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "World Business Consulting",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 70,
+    "full_flags": [
+      "financial pyramid",
+      "пирамид"
+    ],
+    "external_score": 20,
+    "external_flags": [
+      "financial pyramid",
+      "пирамид"
+    ],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "VIP COIN GOLD",
+    "note": "статус: досудебное расследование АФМ",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Sincere Systems",
+    "note": "статус: приговор суда вынесен (S-group, SS-group)",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "ЖК Otau KZ",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Unique Finance",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Antares Trade",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Sweet Money",
+    "note": "статус: расследование закрыто (нереабилитирующие основания)",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "ПК Amanat drive",
+    "note": "статус: досудебное расследование АФМ",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "МФО Лидер Капитал",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Finiko",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 10,
+    "external_flags": [
+      "пирамид"
+    ],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Chia Tai Tianqing",
+    "note": "статус: судебное разбирательство",
+    "full_score": 70,
+    "full_flags": [
+      "ponzi",
+      "пирамид"
+    ],
+    "external_score": 20,
+    "external_flags": [
+      "ponzi",
+      "пирамид"
+    ],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "The Great Tower",
+    "note": "статус: досудебное расследование АФМ",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "ПК Ақ үй Арман",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 10,
+    "external_flags": [
+      "пирамид"
+    ],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Семейный капитал",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Eden life",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 10,
+    "external_flags": [
+      "пирамид"
+    ],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "ПК Елімай-2019",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 10,
+    "external_flags": [
+      "пирамид"
+    ],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "ПК Ayba-Жанұя",
+    "note": "статус: расследование закрыто (нереабилитирующие основания)",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 10,
+    "external_flags": [
+      "пирамид"
+    ],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "ТОО OneCoin",
+    "note": "статус: досудебное расследование АФМ",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 10,
+    "external_flags": [
+      "пирамид"
+    ],
+    "connectors_ok": 4,
+    "connectors_run": 6
+  },
+  {
+    "name": "ПК Ата-мекен 2021",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 10,
+    "external_flags": [
+      "пирамид"
+    ],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Innova Gold",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Chia Tai Pharmaceutical",
+    "note": "статус: судебное разбирательство",
+    "full_score": 70,
+    "full_flags": [
+      "ponzi",
+      "пирамид"
+    ],
+    "external_score": 20,
+    "external_flags": [
+      "ponzi",
+      "пирамид"
+    ],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Has Logistic (ТОО UpgradeAS)",
+    "note": "статус: досудебное расследование АФМ",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 10,
+    "external_flags": [
+      "пирамид"
+    ],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Energy Eolus Qazaqstan",
+    "note": "статус: досудебное расследование АФМ",
+    "full_score": 70,
+    "full_flags": [
+      "financial pyramid",
+      "пирамид"
+    ],
+    "external_score": 20,
+    "external_flags": [
+      "financial pyramid",
+      "пирамид"
+    ],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "B2B Jewerly",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 10,
+    "external_flags": [
+      "пирамид"
+    ],
+    "connectors_ok": 6,
+    "connectors_run": 6
+  },
+  {
+    "name": "Quasar",
+    "note": "статус: расследование закрыто (нереабилитирующие основания)",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 6,
+    "connectors_run": 6
+  },
+  {
+    "name": "Hit Beat Music",
+    "note": "статус: досудебное расследование АФМ",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 10,
+    "external_flags": [
+      "пирамид"
+    ],
+    "connectors_ok": 6,
+    "connectors_run": 6
+  },
+  {
+    "name": "MMK Investment",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "River Coins Limited",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Hermes LTD",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 10,
+    "external_flags": [
+      "пирамид"
+    ],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Qozqan",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 10,
+    "external_flags": [
+      "пирамид"
+    ],
+    "connectors_ok": 5,
+    "connectors_run": 6
+  },
+  {
+    "name": "Metago",
+    "note": "статус: судебное разбирательство",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 10,
+    "external_flags": [
+      "пирамид"
+    ],
+    "connectors_ok": 4,
+    "connectors_run": 6
+  },
+  {
+    "name": "ПК Asar baspana",
+    "note": "статус: досудебное расследование АФМ",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 10,
+    "external_flags": [
+      "пирамид"
+    ],
+    "connectors_ok": 4,
+    "connectors_run": 6
+  },
+  {
+    "name": "Денежный поток",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 4,
+    "connectors_run": 6
+  },
+  {
+    "name": "ТОО Fast Vic",
+    "note": "статус: приговор суда вынесен",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 10,
+    "external_flags": [
+      "пирамид"
+    ],
+    "connectors_ok": 4,
+    "connectors_run": 6
+  },
+  {
+    "name": "Auto Seller",
+    "note": "статус: судебное разбирательство",
+    "full_score": 60,
+    "full_flags": [
+      "пирамид"
+    ],
+    "external_score": 0,
+    "external_flags": [],
+    "connectors_ok": 4,
+    "connectors_run": 6
+  }
+]
