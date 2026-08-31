@@ -13,6 +13,7 @@ from fastapi.responses import StreamingResponse
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s: %(message)s")
 
 from app import auth, auth_store, live, quota, registry
+from app import mobile_feed
 from app import settings as app_settings
 from app.db import get_connection, init_db
 from app.models import (
@@ -443,6 +444,24 @@ def admin_candidates_endpoint(
     набрало риска и потому не попало в Watchlist. status: new/claimed/
     done/failed, не задавать — всё сразу."""
     return registry.list_candidate_leads(status=status, limit=limit)
+
+
+@app.get("/admin/mobile/findings")
+def admin_mobile_findings_endpoint(
+    _: dict = Depends(auth.require_admin),
+    limit: int = Query(default=100, le=300),
+    include_tests: bool = Query(default=False),
+):
+    """Находки партнёрского мобильного приложения — опасный контент в соцсетях.
+
+    База Postgres общая, поэтому мы читаем их таблицы напрямую, СТРОГО на
+    чтение: писать и модерировать эти записи должно их приложение. Если их
+    схема изменится, модуль вернёт пустой список, а не уронит админку.
+    """
+    return {
+        "stats": mobile_feed.stats(),
+        "items": mobile_feed.list_findings(limit=limit, include_tests=include_tests),
+    }
 
 
 @app.post("/admin/tips/{tip_id}/status")
