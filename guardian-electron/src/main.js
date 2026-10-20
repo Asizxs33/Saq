@@ -233,7 +233,10 @@ app.setAppUserModelId("kz.saq.guardian");
 app.whenReady().then(async () => {
   createWindow();
   createTray();
-  ocrWorker = await createWorker("rus+eng");
+  // kaz обязателен: в Казахстане рассылки часто приходят по-казахски, а
+  // rus.traineddata не знает букв ә ғ қ ң ө ұ ү һ і — текст распознавался
+  // с ошибками, и до детектора доходила каша вместо фраз
+  ocrWorker = await createWorker("rus+kaz+eng");
   tick();
 });
 
